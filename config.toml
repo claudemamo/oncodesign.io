@@ -1,0 +1,28 @@
+baseurl = "http://oncodesign.io/"
+languageCode = "en-us"
+title = "On Code & Design"
+theme = "hugo-lithium-theme"
+googleAnalytics = "UA-80349200-1"
+disqusShortname = ""
+
+[permalinks]
+    post = "/:year/:month/:day/:title/"
+    page = "/:title/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+[[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/claudemamo"
+[[menu.main]]
+    name = "LinkedIn"
+    url = "http://mt.linkedin.com/in/claudemamo"
+
+[params]
+    description = "Thoughts on code & design"
+
+    [params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50

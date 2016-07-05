@@ -1,0 +1,12 @@
++++
+title = "Conventions, Conventions, Conventions"
+date = 2012-05-26T11:53:00Z
+updated = 2013-08-29T21:15:36Z
+tags = ["Spring Integration"]
+blogimport = true 
+[author]
+	name = "Claude"
+	uri = "https://www.blogger.com/profile/06379003436141860057"
++++
+
+<div style="text-align: justify;">I've been working with open source projects for a couple of years now and I've come to expect two things from such projects:</div><ul><li style="text-align: justify;">A set of working examples that comes with the distribution, and a</li></ul><ul><li style="text-align: justify;">Quick guide on getting started.</li></ul><div style="text-align: justify;"><a href="http://www.mulesoft.org/documentation/display/MULE3START/Basic+Studio+Tutorial" rel="" target="_blank">Mule</a> has them. <a href="http://servicemix.apache.org/docs/4.4.0/quickstart/index.html" rel="" target="_blank">ServiceMix</a> has them. So why not Spring Integration? It's&nbsp;a shame because I heard a lot of good things about the software. I couldn't find a reason why SpringSource didn't post an official guide on getting started quickly in their <a href="http://www.springsource.org/spring-integration" rel="" target="_blank">main page</a>. However, they do have&nbsp;a <a href="http://blog.springsource.org/2010/09/29/new-spring-integration-samples" rel="" target="_blank">reason</a> for leaving examples out from the distribution. Although&nbsp;for me, it's not a good enough reason.&nbsp;</div><div style="text-align: justify;"><br /></div><div style="text-align: justify;">As a frequent user of open source projects, I'm accustomed to certain conventions. For instance, I expect to find a "README.txt" in the distribution's root folder telling me how to launch the program. When you decide to stay away from conventions, new users have to rely on Google to find what they're looking for. This is great for Google but not for your open source project since the user might get fed up searching and just try another project. I spent about 5 minutes searching for a simple Spring Integration example. This could have been because I chose a poor search term or I'm a slow reader, but still, for me it was a waste time. Doing the same thing in Mule or ServiceMix took me a second. Why? Not because I used Mule or ServiceMix before but because I <b><i>expected</i></b>&nbsp;there would be example folders in their distributions.&nbsp;Which project do you think the impatient user will have a better experience learning?</div><div style="text-align: justify;"></div>
