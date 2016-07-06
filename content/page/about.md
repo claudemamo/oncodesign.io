@@ -1,6 +1,7 @@
 +++
 date = "2016-05-05T21:48:51-07:00"
 title = "About"
+nocomment = true
 +++
 
 I am an independent software contractor living in the island of [Malta](https://en.wikipedia.org/wiki/Malta).

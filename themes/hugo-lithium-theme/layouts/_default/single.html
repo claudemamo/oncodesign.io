@@ -18,7 +18,9 @@
     </div>
   </article>
 
-  {{ template "_internal/disqus.html" . }}
+  {{ if not .Params.nocomment }}
+    {{ template "_internal/disqus.html" . }}
+  {{ end }}
 
 </main>
 

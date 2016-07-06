@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "On Code & Design"
 theme = "hugo-lithium-theme"
 googleAnalytics = "UA-80349200-1"
-disqusShortname = ""
+disqusShortname = "oncodesign"
 
 [permalinks]
     post = "/:year/:month/:day/:title/"
