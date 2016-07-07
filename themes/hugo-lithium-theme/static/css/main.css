@@ -27,6 +27,15 @@ a {
   outline: none;
 }
 
+.blog-title {
+  max-width: 900px;
+  margin: 60px auto 80px;
+  font-size: 50px;
+  line-height: 1.7;
+  color: #555;
+  font-family: 'Lato', sans-serif;
+}
+
 .wrapper {
   overflow: hidden;
   position: relative;
@@ -190,7 +199,7 @@ a {
   text-decoration: none;
   font-size: 21px;
   font-family: 'Lato', sans-serif;
-  font-weight: bold;
+  font-weight: normal;
   color: #222;
   padding: 5px 0;
   border-bottom: 1px solid #ddd;
@@ -281,6 +290,10 @@ a {
 
   .archive {
     text-align: left;
+  }
+
+  .archive-date {
+    font-size: 32px;
   }
 
   .archive-title {
