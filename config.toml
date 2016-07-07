@@ -22,7 +22,7 @@ disqusShortname = "oncodesign"
 [params]
     description = "Thoughts on code & design"
 
-    [params.logo]
+[params.logo]
     url = "logo.png"
     width = 50
     height = 50
