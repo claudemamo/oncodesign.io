@@ -9,16 +9,6 @@ disqusShortname = "oncodesign"
     post = "/:year/:month/:day/:title/"
     page = "/:title/"
 
-[[menu.main]]
-    name = "About"
-    url = "/about/"
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/claudemamo"
-[[menu.main]]
-    name = "LinkedIn"
-    url = "http://mt.linkedin.com/in/claudemamo"
-
 [params]
     description = "Thoughts on code & design"
 

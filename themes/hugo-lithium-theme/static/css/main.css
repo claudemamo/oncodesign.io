@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  font-family: 'Merriweather', serif;
+  font-family: 'Noto Serif', serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #222;
 }
 
@@ -30,10 +30,11 @@ a {
 .blog-title {
   max-width: 900px;
   margin: 60px auto 80px;
-  font-size: 50px;
-  line-height: 1.7;
-  color: #555;
-  font-family: 'Lato', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-shadow: 0 1px 6px rgba(0,0,0,.1);
+  font-family: 'Open Sans', sans-serif;
 }
 
 .wrapper {
@@ -52,13 +53,13 @@ a {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 15px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', serif;
   text-align: right;
 }
 
 .nav-logo {
   float: left;
-  margin-top: -11px;
+  margin-top: -10px;
   transition: transform 150ms ease-out;
 }
 
@@ -121,7 +122,7 @@ a {
   margin-top: 12px;
   float: right;
   font-size: 10px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Noto Serif', serif;
   padding: 1px 5px;
   font-weight: bold;
   border-radius: 3px;
@@ -198,7 +199,7 @@ a {
   display: inline-block;
   text-decoration: none;
   font-size: 21px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   color: #222;
   padding: 5px 0;
@@ -212,7 +213,7 @@ a {
 .footer {
   padding: 25px 0;
   text-align: center;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Noto Serif', serif;
 }
 
 .footer-links {
@@ -258,19 +259,24 @@ a {
 
 @media (min-width: 600px) {
   .header {
-    padding: 25px 0;
+    padding: 25px 0 17px;
   }
 
   .nav-logo {
-    margin-top: -13px;
+    margin-top: -15px;
+  }
+
+  .nav-icon {
+    margin-top: -12px;
   }
 
   .nav-logo img {
     max-height: 50px;
   }
 
-  .nav-links {
+  .about-link {
     font-size: 18px;
+    margin: 0 0 0 10px;
   }
 
   .nav-links li {
