@@ -10,7 +10,7 @@ disqusShortname = "oncodesign"
     page = "/:title/"
 
 [params]
-    description = "Thoughts on code & design"
+    description = "Thoughts on code, design, and everything else"
 
 [params.logo]
     url = "avatar.png"
