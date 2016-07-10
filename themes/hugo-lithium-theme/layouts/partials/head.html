@@ -12,9 +12,11 @@
 {{ end }}
 
 {{ if eq .URL "/" }}
+<meta property="og:description" content="{{ .Site.Params.description }}">
 <meta property="description" content="{{ .Site.Params.description }}">
 {{ else }}
   {{ if .Description }}
+  <meta property="og:description" content="{{ .Description }}">
   <meta property="description" content="{{ .Description }}">
   {{ end }}
 {{ end }}
