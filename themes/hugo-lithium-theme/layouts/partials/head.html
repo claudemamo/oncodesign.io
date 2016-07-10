@@ -6,9 +6,11 @@
 <title>{{ .Title }}</title>
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Site.BaseURL }}">
 {{ else }}
 <title>{{ .Title }} - {{ .Site.Title }}</title>
 <meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">
+<meta property="og:type" content="article" />
 {{ end }}
 
 {{ if eq .URL "/" }}
