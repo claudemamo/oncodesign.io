@@ -4,12 +4,21 @@ title = "About"
 nocomment = true
 +++
 
-I am an independent software contractor living in the island of [Malta](https://en.wikipedia.org/wiki/Malta).
+My first job after finishing the MSc. was writing training material about an open-source
+framework used in several organisations. I never thought of myself as a gifted writer
+and I certainly preferred writing code than documenting it. Despite of all this, I felt
+a certain sense of clarity about the framework while drawing diagrams for presentation
+slides and writing accompanying training manuals. A kind of clarity I wouldn't
+obtain only by reading books or sitting at classes. My theory is that the act of
+writing forced me to address the weaknesses in the model of understanding I had
+in my head about the framework.
 
-My idols in the software industry are [Martin Fowler](http://martinfowler.com/), [Dan North](http://dannorth.net/), and [Fred George](https://twitter.com/fgeorge52).
+I created this blog to improve my understanding of software as well as
+share my thoughts with the rest of the community. Fellow professionals I follow include [Martin Fowler](http://martinfowler.com/),
+[Dan North](http://dannorth.net/), and [Fred George](https://twitter.com/fgeorge52).
 
-Among my interests are enterprise integration and mobile application development. You can follow my projects on [GitHub](https://github.com/claudemamo).
-
+If you like how my thought processes work and think I can be of help to your
+organisation, you can get in touch with me by connecting on [LinkedIn](https://mt.linkedin.com/in/claudemamo).
 I offer on-site as well as remote consultancy services on the following technologies:
 
 * Java EE
@@ -19,12 +28,3 @@ I offer on-site as well as remote consultancy services on the following technolo
 * ZeroMQ
 * Apache ActiveMQ
 * Apache CXF
-
-I am available for:
-
-* Software Development
-* Architectural and code reviews
-* Technical support
-* Delivering technical training
-
-You can get in touch with me by connecting on [LinkedIn](https://mt.linkedin.com/in/claudemamo).
