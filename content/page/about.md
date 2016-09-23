@@ -4,7 +4,7 @@ title = "About"
 nocomment = true
 +++
 
-Hello, I'm Claude, an independent software contractor living on the island of [Malta](https://en.wikipedia.org/wiki/Malta).
+Hello Internet, I'm Claude, an independent software contractor living on the island of [Malta](https://en.wikipedia.org/wiki/Malta).
 
 A task given to me at my second job was to write training material about an
 open-source framework used in several organisations. I never thought of myself as a
