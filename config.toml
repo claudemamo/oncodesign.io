@@ -6,7 +6,7 @@ googleAnalytics = "UA-80349200-1"
 disqusShortname = "oncodesign"
 
 [permalinks]
-    post = "/:year/:month/:day/:title/"
+    post = "/:year/:month/:day/:filename/"
     page = "/:title/"
 
 [params]

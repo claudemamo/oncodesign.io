@@ -1,38 +1,39 @@
 +++
 date = "2017-04-22T09:33:52+02:00"
 title = "Paging One-to-Many Results in SQL"
-tags = ["Pagination", "PostgreSQL", "SQL", "DENSE_RANK"]
+tags = ["pagination", "PostgreSQL", "SQL", "DENSE_RANK", "one-to-many"]
 +++
 
 Pagination in databases, the division of query results into manageable subsets, is often
 implemented in terms of SQL constructs like _LIMIT_ or _FETCH FIRST_, and _OFFSET_. This
 works well when the result is compromised of one-to-one relationships. On the other hand,
-hypothesize what happens if the relationship is a one-to-many as in the following DDL [1]:
+hypothesise what happens if the relationship is a one-to-many as in the following DDL [1]:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=schema.sql"></script>
 
-An author can publish _n_ books and this relationship is expressed as a foreign key constraint declared
+An author can write _n_ books and this relationship is expressed as a foreign key constraint declared
 on Book's _authorId_ column. A _SELECT * FROM_ statement joining the two tables by the author's ID will produce a row for
 each book the author has written. This means that if you have 3 authors and each author has written 3 books,
 the query will return 9 rows:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-1.txt"></script>
 
-The first attempt at formulating a query that fetches the first page of the result, ordered by author
-name and were a page can have at most 2 authors, might go like this:
+An attempt at formulating a query that sorts the result by author name and fetches
+the result's first page, were the page can have at most 2 authors, might go like this:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=limit-offset.sql"></script>
 
-The above _SELECT_ statement, with a _LIMIT_ of 3 and an _OFFSET_ of 0, will only return books
-authored by Antonopoulos as opposed to books authored by Chomsky in addition to Antonopoulos
-because authors are duplicated in the result set:
+Perhaps to your surprise, the above _SELECT_ statement, with a _LIMIT_ of 2 and an _OFFSET_ of 0, will only return books
+authored by Antonopoulos:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-2.txt"></script>
 
-Paging a one-to-many relationship isn't a trivial problem to solve in pure SQL.
-In fact, it might be tempting to page the result from within the application to achieve
-the desired outcome but such a solution would arguably suffer for large result sets given
-that all rows in the result need to be brought over from the database to the application.
+The books authored by Chomsky weren't included in the result because it's the many-side
+of the relationship (i.e., books) that is paginated as opposed to the one-side (i.e, authors).
+Paging the one-side of a one-to-many relationship isn't a trivial problem to solve in pure SQL.
+In fact, it might be tempting to page the result from within the application to achieve the
+desired outcome though this means that the application needs to bring over all the result's rows from
+the database before they can be paginated.
 
 Most popular vendor DBMSs offer window functions for performing calculations over ranges of rows. One such
 function is *DENSE_RANK*. This function ranks each row against the rest of the rows
