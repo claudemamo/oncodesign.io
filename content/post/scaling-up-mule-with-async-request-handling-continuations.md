@@ -3,7 +3,10 @@ title = "Scaling up Mule with Async Request Handling/Continuations"
 date = 2014-01-07T14:01:00Z
 updated = 2014-09-17T10:52:41Z
 tags = ["Mule 3", "Mule"]
-blogimport = true 
+blogimport = true
+aliases = [
+  "/2014/01/07/scaling-up-mule-with-async-request-handling/continuations/"
+]
 [author]
 	name = "Claude"
 	uri = "https://www.blogger.com/profile/06379003436141860057"

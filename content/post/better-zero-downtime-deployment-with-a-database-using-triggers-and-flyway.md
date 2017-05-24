@@ -1,7 +1,10 @@
 +++
 date = "2016-09-23T14:29:41+02:00"
-title = "Better Ø Downtime Deployment with a Database using Triggers (& Flyway)"
+title = "Better 0-Downtime Deployment with a Database using Triggers (& Flyway)"
 tags = ["PostGreSQL", "zero downtime deployment", "triggers", "database", "Flyway"]
+aliases = [
+  "/2016/09/23/better-ø-downtime-deployment-with-a-database-using-triggers--flyway/"
+]
 +++
 
 This summer I was initiated into the arcane art of zero downtime deployment.
@@ -29,7 +32,7 @@ state such that (1) any un-migrated data slipped in from the previous deployment
 is migrated   and (2) the schema is no longer backwards compatible.
 
 What struck me about the above approach is the relatively long deployment procedure
-ops have to follow. Minimally, ops are required to make 3 deployments multiplied by the number of replicas (i.e., 3 * r).
+ops have to follow. Minimally, ops are required to make 3 deployments multiplied by the number of replicas.
 Moreover, for each deployment, a different version of the application needs to be released.
 This means bumping the application version no., tagging the released application source code,
 building it, and so on. Leaving aside logistics, this strategy necessitates
@@ -47,7 +50,7 @@ to PostGreSQL, where the _surname_ column will be added:
 <script src="https://gist.github.com/claudemamo/e4b3af389f7a5ba031f7813716c0c3de.js?file=V1__init.sql"></script>
 
 The migration script adding the _surname_ column to the _PERSON_ table is like
-the article's BUT with one crucial difference:
+the article's but with one crucial difference:
 
 <script src="https://gist.github.com/claudemamo/e4b3af389f7a5ba031f7813716c0c3de.js?file=V2__Add_surname(1).sql"></script>
 
