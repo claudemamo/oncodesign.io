@@ -74,7 +74,7 @@ with a limit of 2 authors. Here's how to achieve this with *DENSE_RANK*:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-6.txt"></script>
 
-Note how *DENSE_RANK* allows us to more or less to **wrap around** the main query rather than changing it.
+Note how *DENSE_RANK* allows us to more or less **wrap around** the main query rather than changing it.
 We can even take this one step further:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-0-count-2-wrapped.sql"></script>
