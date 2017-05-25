@@ -29,7 +29,7 @@ authored by Antonopoulos:
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-2.txt"></script>
 
 The books authored by Chomsky weren't included in the result because it's the many-side
-of the relationship (i.e., books) that is paginated as opposed to the one-side (i.e., authors).
+of the relationship (i.e., books) which is paginated as opposed to the one-side (i.e., authors).
 Paging the one-side of a one-to-many relationship isn't a trivial problem to solve in pure SQL
 without re-writing part of the query as a sub-select:
 
@@ -55,7 +55,7 @@ to row _y_'s author's ID and name:
 
 With the *offset_* rank column, we can scroll forwards or backwards taking into account
 that duplicate authors in the result have the same rank. Say we want to get records
- starting from offset 1. Keeping in mind that _rank = offset + 1_, this requirement would be simply expressed as:
+ starting from offset 1. Keeping in mind _rank = offset + 1_, this requirement would be simply expressed as:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-1.sql"></script>
 
@@ -68,19 +68,20 @@ To add a logical count, another rank, representing the count, is re-computed ove
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-5.txt"></script>
 
 In the beginning of this post, we wanted to fetch the first page of the result
-with a limit of 2 authors. Here's how to achieve this with DENSE_RANK:
+with a limit of 2 authors. Here's how to achieve this with *DENSE_RANK*:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-0-count-2.sql"></script>
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-6.txt"></script>
 
-Note that *DENSE_RANK* allows us to more or less to **wrap around** the main query rather than change it.
+Note how *DENSE_RANK* allows us to more or less to **wrap around** the main query rather than changing it.
 We can even take this one step further:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-0-count-2-wrapped.sql"></script>
 
-By moving the computation of the offset rank outside of the main query, we can
-easily write code that dynamically, and transparently, applies paging to the queries a developer writes.
+By moving the computation of the offset rank outside of the main query, we have
+the possibility to easily write string manipulation code in the application that
+dynamically, and transparently, applies pagination to queries.
 
 <div style="text-align: justify; line-height: 1.3;">
   <span style="font-family: Times, Times New Roman, serif; font-size: small;">
