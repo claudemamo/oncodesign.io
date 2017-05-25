@@ -13,7 +13,7 @@ hypothesise what happens if the relationship is a one-to-many as in the followin
 
 An author can write _n_ books and this relationship is expressed as a foreign key constraint declared
 on Book's _authorId_ column. A _SELECT * FROM_ statement joining the two tables by the author's ID will produce a row for
-each book the author has written. This means that if you have 3 authors and each author has written 3 books,
+each book the author has written. This means that if you have 3 authors and each one has authored 3 books,
 the query will return 9 rows:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-1.txt"></script>
@@ -23,23 +23,27 @@ the result's first page, were the page can have at most 2 authors, might go like
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=limit-offset.sql"></script>
 
-Perhaps to your surprise, the above _SELECT_ statement, with a _LIMIT_ of 2 and an _OFFSET_ of 0, will only return books
+Perhaps to one's surprise, the above _SELECT_ statement, with a _LIMIT_ of 2 and an _OFFSET_ of 0, will only return books
 authored by Antonopoulos:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-2.txt"></script>
 
 The books authored by Chomsky weren't included in the result because it's the many-side
-of the relationship (i.e., books) that is paginated as opposed to the one-side (i.e, authors).
-Paging the one-side of a one-to-many relationship isn't a trivial problem to solve in pure SQL.
-In fact, it might be tempting to page the result from within the application to achieve the
-desired outcome though this means that the application needs to bring over all the result's rows from
-the database before they can be paginated.
+of the relationship (i.e., books) that is paginated as opposed to the one-side (i.e., authors).
+Paging the one-side of a one-to-many relationship isn't a trivial problem to solve in pure SQL
+without re-writing part of the query as a sub-select:
+
+<script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=sub-select.sql"></script>
+
+In practice, I find it inconvenient to formulate a query in this way in order to accommodate
+pagination. It forces the developer to think about pagination every time he writes
+a query.
 
 Most popular vendor DBMSs offer window functions for performing calculations over ranges of rows. One such
 function is *DENSE_RANK*. This function ranks each row against the rest of the rows
-to produce a sequence of numbers starting from 1. Rows which are equal in rank have
-the same sequence number. *DENSE_RANK* is the key to solving the one-to-many pagination
-problem as it helps us simulate logical counts and offsets based on the author's primary key column:
+to produce a sequence of numbers starting from 1. Rows equal in rank have the
+same sequence number. *DENSE_RANK* is an alternative solution for the one-to-many
+pagination problem as it helps us simulate logical counts and offsets based on the author's primary key column:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset.sql"></script>
 
@@ -69,6 +73,14 @@ with a limit of 2 authors. Here's how to achieve this with DENSE_RANK:
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-0-count-2.sql"></script>
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-6.txt"></script>
+
+Note that *DENSE_RANK* allows us to more or less to **wrap around** the main query rather than change it.
+We can even take this one step further:
+
+<script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-0-count-2-wrapped.sql"></script>
+
+By moving the computation of the offset rank outside of the main query, we can
+easily write code that dynamically, and transparently, applies paging to the queries a developer writes.
 
 <div style="text-align: justify; line-height: 1.3;">
   <span style="font-family: Times, Times New Roman, serif; font-size: small;">
