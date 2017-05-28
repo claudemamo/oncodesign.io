@@ -36,8 +36,9 @@ without re-writing part of the query as a sub-select:
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=sub-select.sql"></script>
 
 In practice, I find it inconvenient to formulate a query in this way in order to accommodate
-pagination. It doesn't lend itself easily to runtime string manipulation so the
-developer is forced to think about pagination every time he writes a query.
+pagination. It doesn't lend itself easily to runtime string manipulation and
+therefore automating paging, so that the developer isn't forced to think about pagination
+every time he writes a query, is harder.
 
 Most popular vendor DBMSs offer window functions for performing calculations over ranges of rows. One such
 function is *DENSE_RANK*. This function ranks each row against the rest of the rows
