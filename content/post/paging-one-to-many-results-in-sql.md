@@ -11,7 +11,7 @@ hypothesise what happens if the relationship is a one-to-many as in the followin
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=schema.sql"></script>
 
-An author can write _n_ books and this relationship is expressed as a foreign key constraint declared
+An author can write _n_ books as expressed in the foreign key constraint declared
 on Book's _authorId_ column. A _SELECT * FROM_ statement joining the two tables by the author's ID will produce a row for
 each book the author has written. This means that if you have 3 authors and each one has authored 3 books,
 the query will return 9 rows:
@@ -37,7 +37,7 @@ without re-writing part of the query as a sub-select:
 
 In practice, I find it inconvenient to formulate a query in this way in order to accommodate
 pagination. It doesn't lend itself easily to runtime string manipulation and
-therefore automating paging, so that the developer isn't forced to think about pagination
+therefore automating paging, so that the developer isn't forced to think about limits/offsets
 every time he writes a query, is harder.
 
 Most popular vendor DBMSs offer window functions for performing calculations over ranges of rows. One such
