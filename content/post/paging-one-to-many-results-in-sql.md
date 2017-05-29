@@ -28,10 +28,11 @@ authored by Antonopoulos:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=result-2.txt"></script>
 
-The books authored by Chomsky weren't included in the result because it's the many-side
-of the relationship (i.e., books) which is paginated as opposed to the one-side (i.e., authors).
-Paging the one-side of a one-to-many relationship isn't a trivial problem to solve in pure SQL
-without re-writing part of the query as a sub-select:
+The books authored by Chomsky as well as Antonopoulos's book, 'Mastering Ethereum',
+weren't included in the result because it's the many-side of the relationship (i.e., books)
+which is paginated as opposed to the one-side (i.e., authors). Paging the one-side
+of a one-to-many relationship isn't a trivial problem to solve in pure SQL without
+re-writing part of the query as a sub-select:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=sub-select.sql"></script>
 
