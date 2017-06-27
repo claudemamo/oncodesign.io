@@ -85,7 +85,7 @@ By moving the computation of the offset rank outside of the main query, we have
 the possibility to easily write string manipulation code in the application that
 dynamically, and transparently, applies pagination to queries.
 
-**Edit (27/06/2017):** Upon revisiting the final query, I realised that it can be reduced:
+**Edit (27/06/2017):** Upon revisiting the final query, I realised that it can be reduced to:
 
 <script src="https://gist.github.com/claudemamo/0ba4ad21df38dacee9d64258c0166da4.js?file=dense-rank-offset-0-offset-2.sql"></script>
 
