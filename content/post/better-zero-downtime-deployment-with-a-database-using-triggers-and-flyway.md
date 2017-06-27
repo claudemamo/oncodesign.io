@@ -1,7 +1,7 @@
 +++
 date = "2016-09-23T14:29:41+02:00"
 title = "Better 0-Downtime Deployment with a Database using Triggers (& Flyway)"
-tags = ["PostGreSQL", "zero downtime deployment", "triggers", "database", "Flyway"]
+tags = ["PostgreSQL", "zero downtime deployment", "triggers", "database", "Flyway"]
 aliases = [
   "/2016/09/23/better-ø-downtime-deployment-with-a-database-using-triggers--flyway/"
 ]
@@ -45,7 +45,7 @@ Given the mentioned drawbacks, I decided to radically alter the approach. Instea
 through a long sequence of deployments, I shifted the strategy to using database insert/update triggers.
 All the popular databases have support for triggers and the vendor's database, PostgreSQL, wasn't
 an exception. Consider the following table taken from the article's example, and adapted
-to PostGreSQL, where the _surname_ column will be added:
+to PostgreSQL, where the _surname_ column will be added:
 
 <script src="https://gist.github.com/claudemamo/e4b3af389f7a5ba031f7813716c0c3de.js?file=V1__init.sql"></script>
 
@@ -66,10 +66,10 @@ replica because the heavy lifting is performed inside the system-wide trigger
 as opposed to the application. In the next release, the trigger
 and the obsolete column will be dropped from the database.
 
-Note that if the database we were on wasn't PostGreSQL, it might be possible
+Note that if the database we were on wasn't PostgreSQL, it might be possible
 for data to be inserted or updated without firing the trigger. Indeed, the _NOT NULL_
 constraint imposed on the _surname_ column may be fired from app V1 if an attempt to insert the data is performed
 between the time _surname_ is added and the trigger is created. The reason
 is that many databases don't support transactional DDL. However, this [isn't the case
-for PostGreSQL](https://wiki.postgresql.org/wiki/Transactional_DDL_in_PostgreSQL:_A_Competitive_Analysis)
+for PostgreSQL](https://wiki.postgresql.org/wiki/Transactional_DDL_in_PostgreSQL:_A_Competitive_Analysis)
 and therefore the DML and DDL will run in single transaction.
