@@ -111,7 +111,7 @@ an AS2-specific HTTP header and it provides two major benefits:
 
 Below we have an illustration of how async MDNs work given the document is encrypted and signed:
 
-![AS2 process for signing and encrypting](/images/as2-process-signed-encrypted.png )
+![AS2 process for signing and encrypting](/images/as2-process-signed-encrypted.png)
 
 As you can see above, the recipient replies with a 200 OK as soon as it receives the request. 
 The HTTP response only acknowledges that a request was received; not that its content was 
