@@ -109,7 +109,6 @@ an AS2-specific HTTP header and it provides two major benefits:
 
 2. The receiver processes the document at its own pace. The implication is fewer resources can be allocated to the receiver for decrypting and verifying the data since the HTTP response time is no longer a crucial factor.
 
-test
 Below we have an illustration of how async MDNs work given the document is encrypted and signed:
 
 ![AS2 process for signing and encrypting](/images/as2-process-signed-encrypted.png)
