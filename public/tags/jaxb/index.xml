@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jaxb on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/jaxb/</link>
+    <description>Recent content in Jaxb on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Nov 2012 21:09:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/jaxb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Practical Solution for XML-to-Relational Mapping</title>
+      <link>http://oncodesign.io/2012/11/14/a-practical-solution-for-xml-to-relational-mapping/</link>
+      <pubDate>Wed, 14 Nov 2012 21:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/11/14/a-practical-solution-for-xml-to-relational-mapping/</guid>
+      <description>A challenge in the field of integration is persisting&amp;nbsp;to a relational database&amp;nbsp;the contents of an XML document [1].&amp;nbsp;At first glance, this might seem like a no-brainer. Create a database table where each column maps to an element defined in the XML document&#39;s XSD. Then write an INSERT SQL statement that iterates through each element of the XML document.&amp;nbsp;But what if an XML element has attributes? What about elements containing other elements?</description>
+    </item>
+    
+  </channel>
+</rss>

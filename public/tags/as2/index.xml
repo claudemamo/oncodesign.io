@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>As2 on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/as2/</link>
+    <description>Recent content in As2 on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 May 2015 02:09:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/as2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Primer to AS2</title>
+      <link>http://oncodesign.io/2015/05/15/a-primer-to-as2/</link>
+      <pubDate>Fri, 15 May 2015 02:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/05/15/a-primer-to-as2/</guid>
+      <description>This post was reproduced on PortX&amp;rsquo;s blog.
+AS2 has been out for a while but I bet most of you have never heard of the spec. Indeed, a couple of months ago I myself was oblivious to it. That is until ModusBox asked me to help them build a first-class AS2 connector for Mule.
+AS2 (Applicability Statement 2) is a protocol that operates over HTTP/s and is typically used between organisations to exchange business data in any format securely.</description>
+    </item>
+    
+  </channel>
+</rss>

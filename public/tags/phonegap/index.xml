@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Phonegap on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/phonegap/</link>
+    <description>Recent content in Phonegap on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Aug 2012 12:04:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/phonegap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Attaching a file in Cordova &amp; uploading it with jQuery Mobile</title>
+      <link>http://oncodesign.io/2012/08/18/attaching-a-file-in-cordova--uploading-it-with-jquery-mobile/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/08/18/attaching-a-file-in-cordova--uploading-it-with-jquery-mobile/</guid>
+      <description>This post is for those unlucky souls who are tasked with developing an Android solution that attaches a file to an HTML form using Cordova and uploads the form via jQuery Mobile. Documentation on these topics is scarce so I&amp;rsquo;ve created a minimal example on my GitHub page demonstrating how to do this. Instructions to run the example are found inside the project&amp;rsquo;s README file.</description>
+    </item>
+    
+    <item>
+      <title>A WebSocket Cordova plugin for Android</title>
+      <link>http://oncodesign.io/2012/07/06/a-websocket-cordova-plugin-for-android/</link>
+      <pubDate>Fri, 06 Jul 2012 17:14:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/07/06/a-websocket-cordova-plugin-for-android/</guid>
+      <description>This week I&amp;rsquo;ve investigated the feasibility of leveraging&amp;nbsp;NullMQ&amp;nbsp;inside a Cordova/PhoneGap application on Android. NullMQ sends and receives messages via WebSocket, and unfortunately, Android&amp;rsquo;s browser doesn&amp;rsquo;t support the standard yet.&amp;nbsp;I found Cordova plugins on GitHub that implement WebSocket. The problem is that none of them functioned properly against the latest version of the WebSocket spec, that is, RFC 6455. So I decided to fork the Java-WebSocket project and expose it as a Cordova plugin.</description>
+    </item>
+    
+  </channel>
+</rss>

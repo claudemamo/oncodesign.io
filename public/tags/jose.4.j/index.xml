@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jose.4.j on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/jose.4.j/</link>
+    <description>Recent content in Jose.4.j on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Nov 2015 13:42:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/jose.4.j/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Implementing a Replicated Token Service with JSON Web Tokens</title>
+      <link>http://oncodesign.io/2015/11/09/implementing-a-replicated-token-service-with-json-web-tokens/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/11/09/implementing-a-replicated-token-service-with-json-web-tokens/</guid>
+      <description>Last week I observed one of the 8 fallacies of distributed systems in action:
+&#34;Topology doesn&#39;t change&#34;A client of mine deployed the latest versions of his web services to a highly-available QA environment. Sanity tests gave initial confirmation that the system was behaving as expected. But then, the QA team reported weird behaviour in the system&#39;s offline functionality. So I was called in the figure out the problem. The logs showed an application getting random HTTP 401s from the system&#39;s token service.</description>
+    </item>
+    
+  </channel>
+</rss>

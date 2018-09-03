@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Soap on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/soap/</link>
+    <description>Recent content in Soap on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Aug 2013 20:07:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/soap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JRuby CXF: A Gem for Creating SOAP Web Services</title>
+      <link>http://oncodesign.io/2013/08/10/jruby-cxf-a-gem-for-creating-soap-web-services/</link>
+      <pubDate>Sat, 10 Aug 2013 20:07:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/08/10/jruby-cxf-a-gem-for-creating-soap-web-services/</guid>
+      <description>It seems to me that Web Services don&amp;rsquo;t receive much love from Rubyists. In fact, of the two Ruby projects I know that add Web Service support (SOAP4R and ActionWebService), both appear to be inactive. Someone might say that if Web Services are a must, then avoid Ruby or put an integration layer between your Ruby application and the client/service. From my experience, life is not always that simple and these solutions might not be applicable.</description>
+    </item>
+    
+    <item>
+      <title>ReplyTo in ZeroMQ using WS-Addressing</title>
+      <link>http://oncodesign.io/2013/01/27/replyto-in-zeromq-using-ws-addressing/</link>
+      <pubDate>Sun, 27 Jan 2013 17:22:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/01/27/replyto-in-zeromq-using-ws-addressing/</guid>
+      <description>In my last post, I mentioned how one could leverage SOAP along with WS-Addressing to implement the return address pattern in&amp;nbsp;ØMQ&amp;nbsp;(known in the JMS world as&amp;nbsp;ReplyTo&amp;nbsp;and in the MSMQ world as&amp;nbsp;ResponseQueue). In this post, I&amp;rsquo;ll go into more detail by giving a code example using CXF&amp;rsquo;s ØMQ transport.
+Below is a WSDL that is similar in many respects to the WSDL of the previous post:
+Like the other WSDL, this one declares that the service has an operation named sayHi.</description>
+    </item>
+    
+    <item>
+      <title>SOAP over ZeroMQ with Apache CXF</title>
+      <link>http://oncodesign.io/2013/01/15/soap-over-zeromq-with-apache-cxf/</link>
+      <pubDate>Tue, 15 Jan 2013 22:28:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/01/15/soap-over-zeromq-with-apache-cxf/</guid>
+      <description>You&amp;rsquo;re probably asking yourself&amp;nbsp;one of these two questions on reading this post&amp;rsquo;s title:
+Who in his right mind would use SOAP as a data format for ØMQ?Why the heck would I want to have SOAP on top of ØMQ as opposed to HTTP?For the first question, consider a system requiring:
+A return address pattern such as the one offered by JMS&amp;nbsp;and MSMQ.Guaranteed message delivery.&amp;nbsp;Encryption and authentication of messages.ØMQ wasn&amp;rsquo;t designed to cover these requirements so it&amp;rsquo;s up to the developer to come up with a solution.</description>
+    </item>
+    
+  </channel>
+</rss>

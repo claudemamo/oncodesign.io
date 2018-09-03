@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Angularjs on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/angularjs/</link>
+    <description>Recent content in Angularjs on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Feb 2014 15:21:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/angularjs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Safely Prevent Template Caching in AngularJS</title>
+      <link>http://oncodesign.io/2014/02/19/safely-prevent-template-caching-in-angularjs/</link>
+      <pubDate>Wed, 19 Feb 2014 15:21:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2014/02/19/safely-prevent-template-caching-in-angularjs/</guid>
+      <description>AngularJS&amp;rsquo;s $templateCache can be a pain in the ass. Sometimes we don&amp;rsquo;t want templates to be cached. A quick Internet search to disable caching gives the following workaround:
+ But as I have learnt with the UI Bootsrap module, this may cause AngularJS modules that use $templateCache to break. A solution is to tweak the above workaround so that new cache entries are removed on route change instead of indiscriminately removing all entries:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.48" />
+
+
+<title>Messaging for ETL Anti-Pattern - On Code &amp; Design</title>
+<meta property="og:title" content="Messaging for ETL Anti-Pattern - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="http://oncodesign.io/" class="nav-logo"><img src="http://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">Messaging for ETL Anti-Pattern</h1>
+
+    
+    <span class="article-date">December 12, 2015</span>
+    
+
+    <div class="article-content">
+      <p>This is a trap I&rsquo;ve observed numerous professionals in the software industry fall into. After all, quite a few people I talk to like to think of messaging as the <a href="https://en.wikipedia.org/wiki/Law_of_the_instrument" target="_blank">golden hammer</a>. The sales folks surely want us to believe that this is the case. So many organisations have dug themselves into a hole by using <i>Messaging for ETL</i> that I&rsquo;m classifying this problem as an anti-pattern and giving it a brief overview.<br /><br /><b>Context</b><br /><br />The business mandates end-of-day reports. The data required for these reports is locked up in CSV files hosted on a FTP server. Each file can range from hundreds to thousands of MBs (i.e., GBs) of records. Records need to be cleansed, massaged, enriched, and transformed from one format to another. Furthermore, some record sets need to be joined with others. At the final stages of the process, the target records have to be written to files and uploaded to a CRM.<br /><br /><b>Problem</b><br /><br />The business decides to use&nbsp;<i>Messaging for ETL</i>. The rationality behind such a decision can vary. One argument might be that some messaging solutions are suited for ETL tasks because they come with a broad set of protocol adaptors and have sophisticated transformation capabilities. The messaging solution could be an ESB, even though the term appears to have fallen out of fashion with the marketing crowd nowadays.<br /><br />Predictably, the development team models each record as a message. <a href="http://www.enterpriseintegrationpatterns.com/patterns/messaging/index.html" target="_blank">Messaging patterns</a> are used to solve common recurring problems. For example,&nbsp;<a href="http://www.enterpriseintegrationpatterns.com/patterns/messaging/MessageChannel.html" target="_blank">message queues</a>&nbsp;in order to process the records concurrently between&nbsp;<a href="http://www.enterpriseintegrationpatterns.com/patterns/messaging/CompetingConsumers.html" target="_blank">competing consumers</a>;&nbsp;<a href="http://www.enterpriseintegrationpatterns.com/patterns/messaging/MessageTranslator.html" target="_blank">message translators</a> for cleansing, massaging, enriching and transforming the data; <a href="http://www.enterpriseintegrationpatterns.com/patterns/messaging/Aggregator.html" target="_blank">aggregator&nbsp;</a>to join records. Applying these patterns is sufficiently easy if the messaging solution has them baked-in.<br /><br /><div class="separator" style="clear: both; text-align: center;"></div><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-40aObn1aqgY/VmcTq4ts1sI/AAAAAAAAANM/xJS-1IWlygU/s1600/messaging-for-etl.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="356" src="http://1.bp.blogspot.com/-40aObn1aqgY/VmcTq4ts1sI/AAAAAAAAANM/xJS-1IWlygU/s400/messaging-for-etl.jpg" width="400" /></a></div><br /><b>Consequences</b><br /><br /><div style="text-align: left;">Loosely speaking, the primitives offered by messaging solutions are <b>overly&nbsp;low-level and general</b> for ETL operations. Taking the context above, reasoning about the application becomes hard when you have more than a handful of joins. Aggregators think in terms of correlation keys while we tend to think in higher terms of join columns. Similarly, message queueing and competing consumers is a low-level way of concurrently processing records. It&rsquo;s more useful for us to think in terms of&nbsp;<i>partitioning</i>&nbsp;the&nbsp;<i>record stream</i>&nbsp;in order to achieve concurrency and not having to worry about queues, consumers, and so on.</div><br /><a href="https://en.wikipedia.org/wiki/Cognitive_dissonance" target="_blank">Conceptual dissonance</a> is one aspect to the problem of&nbsp;<i>Messaging for ETL</i>. Another aspect is performance. Treating each record as a packet of data and processing them in a single go leads to a high rate of message traffic that is <i>uniform</i> over time. From my experience, this often causes a significant, if not drastic, drop in throughput simply because most messaging solutions can&rsquo;t <i>reliably</i> cope with this pattern of traffic. Lock contention is a key factor for this. To illustrate the point, consider the message ID. Several messaging solutions generate a UUID, representing the message ID, and add it to the message before going on to publishing it. Generating a UUID involves obtaining a global lock. As the reader produces hundreds of thousands of messages while it&rsquo;s churning through the CSV files, concurrently, the aggregator is combining individual messages to produce messages with new UUIDs. Given the stream of messages is constant and without any respite, the result is a high rate of lock contention caused by the reader and aggregator fighting each other out for the lock to generate UUIDs.<br /><br /><b>Refactored solution</b><br /><br />One way to untangle this anti-pattern is to migrate the data intensive logic to another tool. A staging database may be a good initial candidate where you can leverage SQL for the heavy-lifting. Other candidates include ones specifically built for ETL. This doesn&rsquo;t mean you&rsquo;re stuck with having to purchase a proprietary ETL tool. Open-source alternatives do exist like <a href="http://community.pentaho.com/" target="_blank">Pentaho</a>. If the data you&rsquo;re transforming is in the realm of &ldquo;Big Data&rdquo;, where you need to distribute its processing across a cluster of nodes, map/reduce frameworks such as Apache Spark or Apache Hadoop should be considered.</p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="http://oncodesign.io/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

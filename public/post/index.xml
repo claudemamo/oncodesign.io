@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on On Code &amp; Design</title>
+    <link>http://oncodesign.io/post/</link>
+    <description>Recent content in Posts on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Apr 2017 09:33:52 +0200</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Paging One-to-Many Results in SQL</title>
+      <link>http://oncodesign.io/2017/04/22/paging-one-to-many-results-in-sql/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/2017/04/22/paging-one-to-many-results-in-sql/</guid>
+      <description>Pagination in databases, the division of query results into manageable subsets, is often implemented in terms of SQL constructs like LIMIT or FETCH FIRST, and OFFSET. This works well when the result is compromised of one-to-one relationships. On the other hand, hypothesise what happens if the relationship is a one-to-many as in the following DDL [1]:
+ An author can write n books as expressed in the foreign key constraint declared on Book&amp;rsquo;s authorId column.</description>
+    </item>
+    
+    <item>
+      <title>Better 0-Downtime Deployment with a Database using Triggers (&amp; Flyway)</title>
+      <link>http://oncodesign.io/2016/09/23/better-zero-downtime-deployment-with-a-database-using-triggers-and-flyway/</link>
+      <pubDate>Fri, 23 Sep 2016 14:29:41 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/2016/09/23/better-zero-downtime-deployment-with-a-database-using-triggers-and-flyway/</guid>
+      <description>This summer I was initiated into the arcane art of zero downtime deployment. A vendor, for better or worse, mandated that application releases are deployed on their platform without sacrificing the service&amp;rsquo;s availability. Achieving no downtime for a stateless application is more or less straightforward. Take down the application server, upgrade the application, and restart the server; repeat per replica. Bringing a database into the picture complicates the process because alterations to the database schema or data must not break the older application which is live until the upgrade is over (i.</description>
+    </item>
+    
+    <item>
+      <title>Blog 2.0</title>
+      <link>http://oncodesign.io/2016/07/10/blog-2.0/</link>
+      <pubDate>Sun, 10 Jul 2016 20:04:36 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/2016/07/10/blog-2.0/</guid>
+      <description>After a long time of inactivity, I&amp;rsquo;ve decided to give my blog a facelift. Among the changes you&amp;rsquo;ll notice is the spanking new domain name. I&amp;rsquo;ll still ramble about open-source software though I&amp;rsquo;ll be rambling about other subjects as well. A special thanks goes to Anthony, a former colleague of mine who recommended technologies I should consider as part of the blog revamp. One of them being the hosting provider: the blog is no longer on Blogger but it&amp;rsquo;s now hosted on GitHub Pages, giving me more control over content.</description>
+    </item>
+    
+    <item>
+      <title>Messaging for ETL Anti-Pattern</title>
+      <link>http://oncodesign.io/2015/12/09/messaging-for-etl-anti-pattern/</link>
+      <pubDate>Wed, 09 Dec 2015 11:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/12/09/messaging-for-etl-anti-pattern/</guid>
+      <description>This is a trap I&amp;rsquo;ve observed numerous professionals in the software industry fall into. After all, quite a few people I talk to like to think of messaging as the golden hammer. The sales folks surely want us to believe that this is the case. So many organisations have dug themselves into a hole by using Messaging for ETL that I&amp;rsquo;m classifying this problem as an anti-pattern and giving it a brief overview.</description>
+    </item>
+    
+    <item>
+      <title>Implementing a Replicated Token Service with JSON Web Tokens</title>
+      <link>http://oncodesign.io/2015/11/09/implementing-a-replicated-token-service-with-json-web-tokens/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/11/09/implementing-a-replicated-token-service-with-json-web-tokens/</guid>
+      <description>Last week I observed one of the 8 fallacies of distributed systems in action:
+&#34;Topology doesn&#39;t change&#34;A client of mine deployed the latest versions of his web services to a highly-available QA environment. Sanity tests gave initial confirmation that the system was behaving as expected. But then, the QA team reported weird behaviour in the system&#39;s offline functionality. So I was called in the figure out the problem. The logs showed an application getting random HTTP 401s from the system&#39;s token service.</description>
+    </item>
+    
+    <item>
+      <title>Describing API Key Authentication in RAML</title>
+      <link>http://oncodesign.io/2015/09/25/describing-api-key-authentication-in-raml/</link>
+      <pubDate>Fri, 25 Sep 2015 14:56:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/09/25/describing-api-key-authentication-in-raml/</guid>
+      <description>I&amp;rsquo;ve finally figured out how to say in RAML that API operations are protected by an API key query parameter:</description>
+    </item>
+    
+    <item>
+      <title>Retiring Kafka Web Console</title>
+      <link>http://oncodesign.io/2015/09/19/retiring-kafka-web-console/</link>
+      <pubDate>Sat, 19 Sep 2015 13:31:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/09/19/retiring-kafka-web-console/</guid>
+      <description>I&amp;rsquo;ve been a busy bee the past few months. The lack of activity on my blog and GitHub is a testament to this. Given my current priorities, I&amp;rsquo;ve taken the decision to retire Kafka Web Console. Don&amp;rsquo;t despair yourself! Kafka Manager appears to be a more sophisticated alternative to what I&amp;rsquo;ve developed, and besides, it&amp;rsquo;s maintained by Yahoo.</description>
+    </item>
+    
+    <item>
+      <title>Dynamically Create Rules using Drools &amp; Rule Templates</title>
+      <link>http://oncodesign.io/2015/08/10/dynamically-create-rules-using-drools--rule-templates/</link>
+      <pubDate>Mon, 10 Aug 2015 15:12:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/08/10/dynamically-create-rules-using-drools--rule-templates/</guid>
+      <description>Rules are used for a variety of stuff in the systems we build. Most often these rules are hard-coded in our application logic. The trouble is that sometimes we want to have the end-user the ability to define his own rules. Imagine an order processing system. The supplier wants to be notified on any range of events as they occur throughout the system but the notification rules are not known ahead of time.</description>
+    </item>
+    
+    <item>
+      <title>A Primer to AS2</title>
+      <link>http://oncodesign.io/2015/05/15/a-primer-to-as2/</link>
+      <pubDate>Fri, 15 May 2015 02:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2015/05/15/a-primer-to-as2/</guid>
+      <description>This post was reproduced on PortX&amp;rsquo;s blog.
+AS2 has been out for a while but I bet most of you have never heard of the spec. Indeed, a couple of months ago I myself was oblivious to it. That is until ModusBox asked me to help them build a first-class AS2 connector for Mule.
+AS2 (Applicability Statement 2) is a protocol that operates over HTTP/s and is typically used between organisations to exchange business data in any format securely.</description>
+    </item>
+    
+    <item>
+      <title>The Trials of Smooks</title>
+      <link>http://oncodesign.io/2014/09/16/the-trials-of-smooks/</link>
+      <pubDate>Tue, 16 Sep 2014 17:28:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2014/09/16/the-trials-of-smooks/</guid>
+      <description>The fact that I&amp;rsquo;m a hard to please guy explains why I rarely show appreciation for a tool. I easily get frustrated when a tool fails to meet the challenges it&amp;rsquo;s meant to solve. Smooks is one of the few tools I appreciate. It&amp;rsquo;s an invaluable transformation framework in the integrator&amp;rsquo;s arsenal. On a project I was on, I threw at Smooks [1] all manner of challenges, and one after another, Smooks overcame them without giving up a key requirement: maintaining a low memory overhead during transformation.</description>
+    </item>
+    
+    <item>
+      <title>Safely Prevent Template Caching in AngularJS</title>
+      <link>http://oncodesign.io/2014/02/19/safely-prevent-template-caching-in-angularjs/</link>
+      <pubDate>Wed, 19 Feb 2014 15:21:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2014/02/19/safely-prevent-template-caching-in-angularjs/</guid>
+      <description>AngularJS&amp;rsquo;s $templateCache can be a pain in the ass. Sometimes we don&amp;rsquo;t want templates to be cached. A quick Internet search to disable caching gives the following workaround:
+ But as I have learnt with the UI Bootsrap module, this may cause AngularJS modules that use $templateCache to break. A solution is to tweak the above workaround so that new cache entries are removed on route change instead of indiscriminately removing all entries:</description>
+    </item>
+    
+    <item>
+      <title>Dynamically Create BitCoin Wallets &amp; Payment Pages on Coinbase in Ruby</title>
+      <link>http://oncodesign.io/2014/02/11/dynamically-create-bitcoin-wallets--payment-pages-on-coinbase-in-ruby/</link>
+      <pubDate>Tue, 11 Feb 2014 16:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2014/02/11/dynamically-create-bitcoin-wallets--payment-pages-on-coinbase-in-ruby/</guid>
+      <description>Last weekend, as part of my new year&amp;rsquo;s resolution to dedicate some time to good causes, I participated in Hack4good: a global 48 hour hackathon aimed at bringing ideas for the social good into life. In Malta, our team brought forward a crowd funding solution for charitable fundraisers with minimal transaction fees. To this end, we selected BitCoin as the donation currency and Coinbase to host fundraise donations.
+One requirement in our project was to have Coinbase automatically issue a BitCoin wallet to each&amp;nbsp;fundraiser.</description>
+    </item>
+    
+    <item>
+      <title>Scaling up Mule with Async Request Handling/Continuations</title>
+      <link>http://oncodesign.io/2014/01/07/scaling-up-mule-with-async-request-handling-continuations/</link>
+      <pubDate>Tue, 07 Jan 2014 14:01:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2014/01/07/scaling-up-mule-with-async-request-handling-continuations/</guid>
+      <description>Non-blocking I/O servers such as Node.js are appealing because, when compared to blocking I/O servers, they utilise less threads to perform the same tasks under the same load. Less threads mean more efficient use of resources (e.g., smaller memory footprint) and better performance (e.g., reduced no. of context switches between threads). Let&amp;rsquo;s take a stab at having non-blocking I/O behaviour in Mule. Consider the following Mule 3.4 application calling an HTTP service:</description>
+    </item>
+    
+    <item>
+      <title>Log4j 2 Memory-Mapped File Appender</title>
+      <link>http://oncodesign.io/2013/12/23/log4j-2-memory-mapped-file-appender/</link>
+      <pubDate>Mon, 23 Dec 2013 11:38:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/12/23/log4j-2-memory-mapped-file-appender/</guid>
+      <description>During the weekend I dug into Java NIO, specifically, mapping files to memory to reduce I/O time. What&amp;rsquo;s more, since I had a lot of free time on my hands, I developed a&amp;nbsp;Log4j 2&amp;nbsp;memory-mapped file appender. On my machine, performance tests running on a single thread using the MemoryMappedFile appender show an improvement by a factor of 3 when compared to the&amp;nbsp;RandomAccessFile&amp;nbsp;appender.</description>
+    </item>
+    
+    <item>
+      <title>Apache Kafka for Event Sourcing</title>
+      <link>http://oncodesign.io/2013/12/11/apache-kafka-for-event-sourcing/</link>
+      <pubDate>Wed, 11 Dec 2013 21:01:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/12/11/apache-kafka-for-event-sourcing/</guid>
+      <description>Event Sourcing is a pattern intended for &#34;capturing all changes to an application state as a sequence of events&#34;. As explained by Fowler, the pattern is useful when you want the ability to completely rebuild the application state, perform temporal querying, or replay events. The LMAX platform is a famous example where Event Sourcing is applied to keep all application state in-memory and consequently contributing to the system&#39;s surprisingly high throughput and low latency.</description>
+    </item>
+    
+    <item>
+      <title>Bridging Mule and MSMQ with ZeroMQ</title>
+      <link>http://oncodesign.io/2013/08/27/bridging-mule-and-msmq-with-zeromq/</link>
+      <pubDate>Tue, 27 Aug 2013 17:36:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/08/27/bridging-mule-and-msmq-with-zeromq/</guid>
+      <description>Hearing the words Mule and Microsoft&amp;rsquo;s MSMQ in the same sentence sends a shiver down my spine. I remember once, Mule guru John D&amp;rsquo;Emic and me had spent a considerable amount of time and patience getting Mule and MSMQ to talk to each other through DCOM. The major factor that contributed to this unpleasant experience was our ignorance of the numerous security measures imposed by Windows to restrict DCOM access. The morale of this story is unless you have a veteran Windows administrator at your disposal, avoid the DCOM route.</description>
+    </item>
+    
+    <item>
+      <title>JRuby Complex Classes in Java Method Signatures</title>
+      <link>http://oncodesign.io/2013/08/19/jruby-complex-classes-in-java-method-signatures/</link>
+      <pubDate>Mon, 19 Aug 2013 11:41:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/08/19/jruby-complex-classes-in-java-method-signatures/</guid>
+      <description>As documented in the JRuby wiki,&amp;nbsp;java_signature&amp;nbsp;changes a method&amp;rsquo;s signature to match the signature string passed to it:
+Observe that the classes in the method signature&amp;nbsp;are primitive. What if we use a complex class as a parameter type?
+Running the above code will give you the following NoMethodError message:
+ The way I went about using complex classes in signatures is to utilise&amp;nbsp;add_method_signature&amp;nbsp;instead of&amp;nbsp;java_signature:
+add_method_signature&amp;nbsp;expects the first argument to be the name of the method that will have its signature changed.</description>
+    </item>
+    
+    <item>
+      <title>JRuby CXF: A Gem for Creating SOAP Web Services</title>
+      <link>http://oncodesign.io/2013/08/10/jruby-cxf-a-gem-for-creating-soap-web-services/</link>
+      <pubDate>Sat, 10 Aug 2013 20:07:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/08/10/jruby-cxf-a-gem-for-creating-soap-web-services/</guid>
+      <description>It seems to me that Web Services don&amp;rsquo;t receive much love from Rubyists. In fact, of the two Ruby projects I know that add Web Service support (SOAP4R and ActionWebService), both appear to be inactive. Someone might say that if Web Services are a must, then avoid Ruby or put an integration layer between your Ruby application and the client/service. From my experience, life is not always that simple and these solutions might not be applicable.</description>
+    </item>
+    
+    <item>
+      <title>The Rails Way to Search Filtering</title>
+      <link>http://oncodesign.io/2013/07/24/the-rails-way-to-search-filtering/</link>
+      <pubDate>Wed, 24 Jul 2013 12:59:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/07/24/the-rails-way-to-search-filtering/</guid>
+      <description>It&amp;rsquo;s been a while since my last post. Numerous changes took place in my professional life since then. I decided to take a break from my career and focus my energy to learning new technologies outside my area of expertise. One biggie is Ruby on Rails&amp;nbsp;3.
+To test my RoR as well as my UI skills, I created&amp;nbsp;evplore.com: a website for sharing, discovering and creating events. A requirement for evplore is to allow users to filter events by country, locality, tag, or date as shown below:</description>
+    </item>
+    
+    <item>
+      <title>How To Publish a WADL with Mule&#39;s REST Router Module </title>
+      <link>http://oncodesign.io/2013/03/25/how-to-publish-a-wadl-with-mules-rest-router-module/</link>
+      <pubDate>Mon, 25 Mar 2013 15:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/03/25/how-to-publish-a-wadl-with-mules-rest-router-module/</guid>
+      <description>It seems to me that Mule&amp;rsquo;s REST Router module, which I&amp;rsquo;ve previously blogged about, is gaining popularity as a viable alternative to the Jersey module. Yet, the REST Router has a serious limitation in that it&amp;rsquo;s unable to generate a WADL: the REST equivalent of a WSDL. Recently, I had to overcome this limitation owing to a customer requirement for producing client code from the WADL.
+Consider the Mule config below:</description>
+    </item>
+    
+    <item>
+      <title>Posting &amp; Processing JSON with jQuery &amp; Spring MVC</title>
+      <link>http://oncodesign.io/2013/03/02/posting--processing-json-with-jquery--spring-mvc/</link>
+      <pubDate>Sat, 02 Mar 2013 12:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/03/02/posting--processing-json-with-jquery--spring-mvc/</guid>
+      <description>Consider an HTML form containing numerous input fields. When the user clicks on the form&amp;rsquo;s submit button, the fields need to be sent as JSON to a service that under the hood is implemented in Spring MVC.
+A jQuery function transforms and posts the form&amp;rsquo;s inputs:
+Through the $(&amp;lsquo;form&amp;rsquo;).submit(&amp;hellip;) function (line 61), jQuery intercepts any click on the submit button and posts the form with the $.ajax(&amp;hellip;) function (line 63). Before sending the data, jQuery transforms the form&amp;rsquo;s inputs to JSON using&amp;nbsp;JSON.</description>
+    </item>
+    
+    <item>
+      <title>ReplyTo in ZeroMQ using WS-Addressing</title>
+      <link>http://oncodesign.io/2013/01/27/replyto-in-zeromq-using-ws-addressing/</link>
+      <pubDate>Sun, 27 Jan 2013 17:22:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/01/27/replyto-in-zeromq-using-ws-addressing/</guid>
+      <description>In my last post, I mentioned how one could leverage SOAP along with WS-Addressing to implement the return address pattern in&amp;nbsp;ØMQ&amp;nbsp;(known in the JMS world as&amp;nbsp;ReplyTo&amp;nbsp;and in the MSMQ world as&amp;nbsp;ResponseQueue). In this post, I&amp;rsquo;ll go into more detail by giving a code example using CXF&amp;rsquo;s ØMQ transport.
+Below is a WSDL that is similar in many respects to the WSDL of the previous post:
+Like the other WSDL, this one declares that the service has an operation named sayHi.</description>
+    </item>
+    
+    <item>
+      <title>SOAP over ZeroMQ with Apache CXF</title>
+      <link>http://oncodesign.io/2013/01/15/soap-over-zeromq-with-apache-cxf/</link>
+      <pubDate>Tue, 15 Jan 2013 22:28:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/01/15/soap-over-zeromq-with-apache-cxf/</guid>
+      <description>You&amp;rsquo;re probably asking yourself&amp;nbsp;one of these two questions on reading this post&amp;rsquo;s title:
+Who in his right mind would use SOAP as a data format for ØMQ?Why the heck would I want to have SOAP on top of ØMQ as opposed to HTTP?For the first question, consider a system requiring:
+A return address pattern such as the one offered by JMS&amp;nbsp;and MSMQ.Guaranteed message delivery.&amp;nbsp;Encryption and authentication of messages.ØMQ wasn&amp;rsquo;t designed to cover these requirements so it&amp;rsquo;s up to the developer to come up with a solution.</description>
+    </item>
+    
+    <item>
+      <title>Demystifying Apache CXF: A RESTful Hello World App</title>
+      <link>http://oncodesign.io/2012/12/20/demystifying-apache-cxf-a-restful-hello-world-app/</link>
+      <pubDate>Thu, 20 Dec 2012 22:17:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/12/20/demystifying-apache-cxf-a-restful-hello-world-app/</guid>
+      <description>The first post&amp;nbsp;of this&amp;nbsp;how-to&amp;nbsp;series showed you what it takes to expose a Hello World application as a SOAP over HTTP Web Service using CXF. For this post, I&amp;rsquo;ll show you how to expose the same app as a RESTful service.
+In the Java world, we use JAX-RS for mapping a class to a RESTful service. Giving a RESTful interface to our Hello World app is just a matter of adding JAX-RS annotations to HelloWorldImpl:</description>
+    </item>
+    
+    <item>
+      <title>Demystifying Apache CXF: A Hello World App</title>
+      <link>http://oncodesign.io/2012/12/19/demystifying-apache-cxf-a-hello-world-app/</link>
+      <pubDate>Wed, 19 Dec 2012 07:56:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/12/19/demystifying-apache-cxf-a-hello-world-app/</guid>
+      <description>&amp;ldquo;CXF scares the sh**t out of me!&amp;rdquo;.&amp;nbsp;This was a client&amp;rsquo;s comment during our discussion on&amp;nbsp;Apache CXF and I think it&amp;rsquo;s a feeling shared by many. This feeling usually arises from a complaint I hear on CXF: the lack of documentation. However, I suspect that CXF&amp;rsquo;s flexibility confuses numerous newbies and therefore contributes to the negative feelings towards it.&amp;nbsp;The bad news is that, for some, it&amp;rsquo;s hard to live without CXF. Popular open source software such as Apache Camel, Mule, and JBoss AS rely on CXF for their out-of-the-box web service support.</description>
+    </item>
+    
+    <item>
+      <title>A Practical Solution for XML-to-Relational Mapping</title>
+      <link>http://oncodesign.io/2012/11/14/a-practical-solution-for-xml-to-relational-mapping/</link>
+      <pubDate>Wed, 14 Nov 2012 21:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/11/14/a-practical-solution-for-xml-to-relational-mapping/</guid>
+      <description>A challenge in the field of integration is persisting&amp;nbsp;to a relational database&amp;nbsp;the contents of an XML document [1].&amp;nbsp;At first glance, this might seem like a no-brainer. Create a database table where each column maps to an element defined in the XML document&#39;s XSD. Then write an INSERT SQL statement that iterates through each element of the XML document.&amp;nbsp;But what if an XML element has attributes? What about elements containing other elements?</description>
+    </item>
+    
+    <item>
+      <title>Mule ZeroMQ Transport: Lightweight RPC with ØMQ and Protocol Buffers</title>
+      <link>http://oncodesign.io/2012/11/06/mule-zeromq-transport-lightweight-rpc-with-0mq-and-protocol-buffers/</link>
+      <pubDate>Tue, 06 Nov 2012 22:12:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/11/06/mule-zeromq-transport-lightweight-rpc-with-0mq-and-protocol-buffers/</guid>
+      <description>Check out John D&amp;rsquo;Emic&amp;rsquo;s awesome&amp;nbsp;blog post demonstrating how&amp;nbsp;ØMQ and Mule could be used for exchanging stock quote data between a front-end and back-end application.</description>
+    </item>
+    
+    <item>
+      <title>Testing Web Services from JUnit using SoapUI</title>
+      <link>http://oncodesign.io/2012/10/22/testing-web-services-from-junit-using-soapui/</link>
+      <pubDate>Mon, 22 Oct 2012 18:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/10/22/testing-web-services-from-junit-using-soapui/</guid>
+      <description>There is no doubt that SoapUI is a superb tool for testing Web Services. Yet, some people&amp;nbsp;seem to think that SoapUI is&amp;nbsp;just&amp;nbsp;used for manual testing.&amp;nbsp;In addition to manual tests, SoapUI supports automated tests, that is, test suites. Test suites are a step in the right direction towards automation but running them still requires human intervention. In other words, the user still has to launch SoapUI and click on the &amp;ldquo;Run&amp;hellip;&amp;rdquo; button.</description>
+    </item>
+    
+    <item>
+      <title>Setting up a Mule Proxy to Validate SOAP Requests</title>
+      <link>http://oncodesign.io/2012/10/12/setting-up-a-mule-proxy-to-validate-soap-requests/</link>
+      <pubDate>Fri, 12 Oct 2012 12:01:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/10/12/setting-up-a-mule-proxy-to-validate-soap-requests/</guid>
+      <description>Check out my latest post on the Ricston blog:&amp;nbsp;Setting up a Mule Proxy to Validate SOAP Requests.</description>
+    </item>
+    
+    <item>
+      <title>Attaching a file in Cordova &amp; uploading it with jQuery Mobile</title>
+      <link>http://oncodesign.io/2012/08/18/attaching-a-file-in-cordova--uploading-it-with-jquery-mobile/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/08/18/attaching-a-file-in-cordova--uploading-it-with-jquery-mobile/</guid>
+      <description>This post is for those unlucky souls who are tasked with developing an Android solution that attaches a file to an HTML form using Cordova and uploads the form via jQuery Mobile. Documentation on these topics is scarce so I&amp;rsquo;ve created a minimal example on my GitHub page demonstrating how to do this. Instructions to run the example are found inside the project&amp;rsquo;s README file.</description>
+    </item>
+    
+    <item>
+      <title>Building ZeroMQ for Android</title>
+      <link>http://oncodesign.io/2012/08/12/building-zeromq-for-android/</link>
+      <pubDate>Sun, 12 Aug 2012 10:16:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/08/12/building-zeromq-for-android/</guid>
+      <description>This weekend I ran ZeroMQ on the Android platform. The ZeroMQ website gives instructions on how to build ZeroMQ for Android and (surprise, surprise) I got errors following them. At least I wasn&amp;rsquo;t alone. Fellow blogger Victor was just as lucky as me. He solved these errors, and what&amp;rsquo;s even better, he created a set of scripts which correctly build ZeroMQ for Android. Alas, running &amp;ldquo;make all&amp;rdquo; on the project gave me the following error:</description>
+    </item>
+    
+    <item>
+      <title>Sharing an FTP service between un-clustered Mule instances</title>
+      <link>http://oncodesign.io/2012/08/03/sharing-an-ftp-service-between-un-clustered-mule-instances/</link>
+      <pubDate>Fri, 03 Aug 2012 10:15:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/08/03/sharing-an-ftp-service-between-un-clustered-mule-instances/</guid>
+      <description>One notorious problem&amp;nbsp;when having Mule instances consuming files from the same FTP server is that it&amp;rsquo;s possibile for two or more Mule instances&amp;nbsp;to concurrently download the same file. This leads to duplicate messages: Mule messages representing&amp;nbsp;the same file in different Mule nodes.
+The clustering solution offered by Mule EE 3.2 addresses this issue by having Mule instances&amp;nbsp;coordinate among each other on who will download files from the FTP server.&amp;nbsp;</description>
+    </item>
+    
+    <item>
+      <title>Rest Module: A lightweight alternative to Mule’s Jersey Module</title>
+      <link>http://oncodesign.io/2012/07/18/rest-module-a-lightweight-alternative-to-mules-jersey-module/</link>
+      <pubDate>Wed, 18 Jul 2012 09:55:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/07/18/rest-module-a-lightweight-alternative-to-mules-jersey-module/</guid>
+      <description>Check out my latest post on the Ricston blog:&amp;nbsp;Rest Module: A lightweight alternative to Mule’s Jersey Module.</description>
+    </item>
+    
+    <item>
+      <title>A WebSocket Cordova plugin for Android</title>
+      <link>http://oncodesign.io/2012/07/06/a-websocket-cordova-plugin-for-android/</link>
+      <pubDate>Fri, 06 Jul 2012 17:14:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/07/06/a-websocket-cordova-plugin-for-android/</guid>
+      <description>This week I&amp;rsquo;ve investigated the feasibility of leveraging&amp;nbsp;NullMQ&amp;nbsp;inside a Cordova/PhoneGap application on Android. NullMQ sends and receives messages via WebSocket, and unfortunately, Android&amp;rsquo;s browser doesn&amp;rsquo;t support the standard yet.&amp;nbsp;I found Cordova plugins on GitHub that implement WebSocket. The problem is that none of them functioned properly against the latest version of the WebSocket spec, that is, RFC 6455. So I decided to fork the Java-WebSocket project and expose it as a Cordova plugin.</description>
+    </item>
+    
+    <item>
+      <title>Mule meet ZeroMQ. ZeroMQ meet Mule.</title>
+      <link>http://oncodesign.io/2012/06/24/mule-meet-zeromq.-zeromq-meet-mule./</link>
+      <pubDate>Sun, 24 Jun 2012 19:17:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/06/24/mule-meet-zeromq.-zeromq-meet-mule./</guid>
+      <description>These past few weeks I&#39;ve been experimenting with ZeroMQ&amp;nbsp;(a.k.a. ØMQ or ZMQ). I like the idea of a library that provides you the building blocks for constructing your own messaging architecture. For example, we may want to send messages to an application that might be unavailable at times. In our system, losing some messages isn&#39;t the end of the world so we don&#39;t need to have a high degree of message reliability.</description>
+    </item>
+    
+    <item>
+      <title>Mule ISO 8583 Module</title>
+      <link>http://oncodesign.io/2012/06/13/mule-iso-8583-module/</link>
+      <pubDate>Wed, 13 Jun 2012 11:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/06/13/mule-iso-8583-module/</guid>
+      <description>Check out my latest post on the Ricston blog: Mule ISO 8583 Module</description>
+    </item>
+    
+    <item>
+      <title>Revisiting Dynamic Ports in Mule 3</title>
+      <link>http://oncodesign.io/2012/05/28/revisiting-dynamic-ports-in-mule-3/</link>
+      <pubDate>Mon, 28 May 2012 20:43:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/05/28/revisiting-dynamic-ports-in-mule-3/</guid>
+      <description>Daniel Zapata wrote an interesting&amp;nbsp;post about using dynamic ports when testing your Mule 3 application. Since then, subsequent releases of Mule included support for JUnit 4 which meant improved flexibility in terms of dynamic ports.
+Before JUnit 4, an annoying problem with dynamic ports was that you were limited to property placeholder names having the following pattern: &amp;lsquo;port&amp;rsquo; +&amp;nbsp;n where n is an integer. For example:
+Using JUnit 4, this problem is solved by leveraging the Rule annotation and the DynamicPort class.</description>
+    </item>
+    
+    <item>
+      <title>Conventions, Conventions, Conventions</title>
+      <link>http://oncodesign.io/2012/05/26/conventions-conventions-conventions/</link>
+      <pubDate>Sat, 26 May 2012 11:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/05/26/conventions-conventions-conventions/</guid>
+      <description>I&#39;ve been working with open source projects for a couple of years now and I&#39;ve come to expect two things from such projects:A set of working examples that comes with the distribution, and aQuick guide on getting started.Mule has them. ServiceMix has them. So why not Spring Integration? It&#39;s&amp;nbsp;a shame because I heard a lot of good things about the software. I couldn&#39;t find a reason why SpringSource didn&#39;t post an official guide on getting started quickly in their main page.</description>
+    </item>
+    
+  </channel>
+</rss>

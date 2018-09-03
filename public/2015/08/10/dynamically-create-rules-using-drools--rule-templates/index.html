@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.48" />
+
+
+<title>Dynamically Create Rules using Drools &amp; Rule Templates - On Code &amp; Design</title>
+<meta property="og:title" content="Dynamically Create Rules using Drools &amp; Rule Templates - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="http://oncodesign.io/" class="nav-logo"><img src="http://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Dynamically Create Rules using Drools &amp; Rule Templates</h1>
+
+    
+    <span class="article-date">August 8, 2015</span>
+    
+
+    <div class="article-content">
+      <p>Rules are used for a variety of stuff in the systems we build. Most often these rules are hard-coded in our application logic. The trouble is that sometimes we want to have the end-user the ability to define his own rules. Imagine an order processing system. The supplier wants to be notified on any range of events as they occur throughout the system but the notification rules are not known ahead of time. Such a rule could be for a late payment or a highly lucrative order event. In Java, the latter rule can be modelled as follows [1]:<br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=Program(1).java"></script>Supporting conjoined conditions in a rule requires us that we tweak the previous example:<br /><br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=Program(2).java"></script>I consider it a risky proposition to write your own primitive rules engine to evaluate rules like the above. I much prefer a solution leveraging Drools 6 in combination with <b><a href="https://docs.jboss.org/drools/release/6.2.0.Final/drools-docs/html_single/#d0e5627" target="_blank">Rule Templates</a></b>. Rule Templates is an awesome Drools feature giving you the ability to define abstract rules at design-time. At run-time, a Drools compiler runs through the rule template and evaluates expressions to generate concrete rules. Given an event type class (e.g., <i>OrderEvent</i>) and a <i>Rule</i> object (e.g.,&nbsp;<i>highValueOrderWidgetsIncRule</i>), we can conceive the following rule template:<br /><br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=template.drl"></script>A couple of things to observe:<br /><ul><li>Line 1: Declares that the DRL file is a rule template.</li></ul><ul><li>Line 3-4: <i>rule</i> and <i>eventType</i> are template parameters.</li></ul><ul><li>Line 8: <i>alertDecision</i> is global variable which we write the outcome to should the rule evaluate to true.</li></ul><ul><li>Line 12: <i>@{row.rowNumber}</i> is an in-built expression that makes the rule ID unique. This is useful for situations when you don&rsquo;t know how many rules you&rsquo;re going to have ahead of time. Note that this doesn&rsquo;t apply to our example.</li></ul><ul><li>Line 14: <i>@{eventType}</i> and <i>@{rule}</i> MVEL expressions that are substituted with the template parameters at run-time.</li></ul><ul><li>Line 16: Sets the property <i>doAlert</i> to true to signal the application that the notification rule was fired.</li></ul>Generating a rule from the template is a matter of instantiating&nbsp;<i>ObjectDataCompiler</i>&nbsp;and passing as parameters:<br /><ol><li>A map consisting of a&nbsp;<i>Rule</i> object (e.g.,&nbsp;<i>highValueOrderWidgetsIncRule</i>) and the name of the event class the Rule object pertains to&nbsp;(e.g., <i>org.ossandme.event.OrderEvent</i>)</li><br /><li>The <i>template.drl</i>&nbsp;file</li></ol><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=Program(3).java"></script>Drools cannot evaluate a&nbsp;<i>Rule</i>&nbsp;object<i>&nbsp;</i>in its current POJO form. In order to evaluate it, we override the <i>Rule</i> class&rsquo;s <i>toString()</i> method to transform the POJO into a formal statement:<br /><br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=Rule.java"></script>Before running the data through the template, Drools calls <i>toString()</i>&nbsp;on the template parameters. Calling <i>toString()</i> on&nbsp;<i>highValueOrderWidgetsIncRule</i>&nbsp;returns the statement:&nbsp;<i>price &gt; 5000.0 &amp;&amp; customer == &lsquo;Widgets Inc.&rsquo;</i>. Going even further, if&nbsp;we apply the template to the statement&nbsp;and event type <i>OrderEvent</i>, we would get the following generated rule:<br /><br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=instance.drl"></script>The last step is to evaluate the rule:<br /><br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=Program(4).java"></script>Finally, let&rsquo;s put this all together. Don&rsquo;t worry, <a href="https://github.com/claudemamo/dynamic-drools-rules" target="_blank">a copy of the complete application</a> can be found on GtiHub:<br /><br /><script src="https://gist.github.com/claudemamo/50736b6ff70f75ae8bd7.js?file=Program.java"></script> <br /><div style="text-align: justify;"><span class="num" style="font-family: Times, 'Times New Roman', serif;">1: I&rsquo;m ignoring the fact that most likely the rule is retrieved from a data store.</span></div></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="http://oncodesign.io/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

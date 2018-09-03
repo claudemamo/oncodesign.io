@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maven on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/maven/</link>
+    <description>Recent content in Maven on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Oct 2012 18:23:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/maven/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Testing Web Services from JUnit using SoapUI</title>
+      <link>http://oncodesign.io/2012/10/22/testing-web-services-from-junit-using-soapui/</link>
+      <pubDate>Mon, 22 Oct 2012 18:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2012/10/22/testing-web-services-from-junit-using-soapui/</guid>
+      <description>There is no doubt that SoapUI is a superb tool for testing Web Services. Yet, some people&amp;nbsp;seem to think that SoapUI is&amp;nbsp;just&amp;nbsp;used for manual testing.&amp;nbsp;In addition to manual tests, SoapUI supports automated tests, that is, test suites. Test suites are a step in the right direction towards automation but running them still requires human intervention. In other words, the user still has to launch SoapUI and click on the &amp;ldquo;Run&amp;hellip;&amp;rdquo; button.</description>
+    </item>
+    
+  </channel>
+</rss>

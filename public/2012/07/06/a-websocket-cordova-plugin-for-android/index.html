@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.48" />
+
+
+<title>A WebSocket Cordova plugin for Android - On Code &amp; Design</title>
+<meta property="og:title" content="A WebSocket Cordova plugin for Android - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="http://oncodesign.io/" class="nav-logo"><img src="http://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">A WebSocket Cordova plugin for Android</h1>
+
+    
+    <span class="article-date">July 7, 2012</span>
+    
+
+    <div class="article-content">
+      <p><span style="background-color: white;">This week I&rsquo;ve investigated the feasibility of leveraging&nbsp;</span><a href="http://avalanche123.com/blog/2012/02/25/interacting-with-zeromq-from-the-browser/" style="background-color: white;" target="_blank">NullMQ</a><span style="background-color: white;">&nbsp;inside a Cordova/PhoneGap application on Android. NullMQ sends and receives messages via <a href="http://en.wikipedia.org/wiki/WebSocket" target="_blank">WebSocket</a>, and unfortunately, Android&rsquo;s browser doesn&rsquo;t support the standard yet.</span><span style="background-color: white;">&nbsp;</span><span style="background-color: white;">I found Cordova plugins on GitHub that implement WebSocket. The problem is that none of them functioned properly against the latest version of the WebSocket spec, that is, RFC 6455. So I decided to <a href="https://github.com/claudemamo/Java-WebSocket" target="_blank">fork the Java-WebSocket project</a> and expose it as a Cordova plugin. The cool thing about the&nbsp;</span><span style="background-color: white;"><a href="https://github.com/Davidiusdadi/Java-WebSocket" target="_blank">Java-WebSocket</a> project is that it supports,&nbsp;</span><span style="background-color: white;">in addition to RFC 6455,</span><span style="background-color: white;">&nbsp;earlier releases of the spec. Although, by default, the plugin is configured to use&nbsp;</span><span style="background-color: white;">RFC 6455.</span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">The plugin&rsquo;s API is identical to the WebSocket one so you don&rsquo;t need to re-learn a new API or change existing WebSocket calls. To install:</span><br /><ol><li>Include <a href="https://raw.github.com/claudemamo/Java-WebSocket/master/assets/www/websocket/websocket.js">websocket.js</a> in the your HTML file: <br /><br /><script src="https://gist.github.com/claudemamo/3060460.js?file=index.html"></script></li><li><span style="background-color: white;">From your console, enter &lsquo;mvn package&rsquo; in the Java-WebSocket project root directory. Move the produced JAR to your Cordova application classpath.</span></li><br /><li><span style="background-color: white;">Add the following plugin entry to the plugins.xml file:</span><br /><br /><script src="https://gist.github.com/claudemamo/3060460.js?file=plugins.xml"></script></li></ol></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="http://oncodesign.io/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

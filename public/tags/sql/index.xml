@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sql on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/sql/</link>
+    <description>Recent content in Sql on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Apr 2017 09:33:52 +0200</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Paging One-to-Many Results in SQL</title>
+      <link>http://oncodesign.io/2017/04/22/paging-one-to-many-results-in-sql/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/2017/04/22/paging-one-to-many-results-in-sql/</guid>
+      <description>Pagination in databases, the division of query results into manageable subsets, is often implemented in terms of SQL constructs like LIMIT or FETCH FIRST, and OFFSET. This works well when the result is compromised of one-to-one relationships. On the other hand, hypothesise what happens if the relationship is a one-to-many as in the following DDL [1]:
+ An author can write n books as expressed in the foreign key constraint declared on Book&amp;rsquo;s authorId column.</description>
+    </item>
+    
+  </channel>
+</rss>

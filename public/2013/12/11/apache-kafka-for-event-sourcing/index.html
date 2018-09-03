@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.48" />
+
+
+<title>Apache Kafka for Event Sourcing - On Code &amp; Design</title>
+<meta property="og:title" content="Apache Kafka for Event Sourcing - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="http://oncodesign.io/" class="nav-logo"><img src="http://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Apache Kafka for Event Sourcing</h1>
+
+    
+    <span class="article-date">December 12, 2013</span>
+    
+
+    <div class="article-content">
+      <div style="text-align: justify;"><div style="text-align: left;"><a href="http://martinfowler.com/eaaDev/EventSourcing.html" target="_blank">Event Sourcing</a> is a pattern intended for "<i>capturing all changes to an application state as a sequence of events</i>". As explained by Fowler, the pattern is useful when you want the ability to completely rebuild the application state, perform temporal querying, or replay events. The <a href="http://www.infoq.com/presentations/LMAX" target="_blank">LMAX platform</a> is a famous example where Event Sourcing is applied to keep all application state in-memory and consequently contributing to the system's surprisingly high throughput and low latency.</div></div><div style="text-align: justify;"><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;">While investigating the architectural components of <a href="http://samza.incubator.apache.org/" target="_blank">Samza</a>, I came across a component that can be of great help when implementing Event Sourcing:&nbsp;<a href="https://kafka.apache.org/" target="_blank">Apache Kafka</a>. <a href="http://research.microsoft.com/en-us/um/people/srikanth/netdb11/netdb11papers/netdb11-final12.pdf" target="_blank">Created</a> by the folks at LinkedIn as a solution to their log processing requirements, Kafka is a broker with message replay built-in.</div><div style="text-align: left;"><br /></div><div style="text-align: left;">Kafka consumers receive messages from publish/subscribe channels known as topics. A topic is divided into user-defined partitions where a partition can serve messages only to a single consumer process. Balancing the message load between consumers is a matter of adding more partitions to the topic, assigning those partitions to other consumer instances, and finally, publishing messages to all topic partitions in a round robin fashion.</div><div style="text-align: left;"><br /></div></div><div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-kvjAcN0vFfg/Uqb4m63H3_I/AAAAAAAAAGw/zJ7XrGdjiDA/s1600/kafka-concepts.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em; text-align: left;"><img border="0" src="http://3.bp.blogspot.com/-kvjAcN0vFfg/Uqb4m63H3_I/AAAAAAAAAGw/zJ7XrGdjiDA/s640/kafka-concepts.png" height="356" width="640" /></a></div><br /><br /><br /><div style="text-align: justify;"><div style="text-align: left;">What fascinates about Kafka is that at any point in time a consumer can rewind back through the history of messages and re-consume messages at a particular offset. In the above diagram, Consumer B can consume the latest messages or replay messages, say, starting from offset 1.&nbsp;</div></div><div style="text-align: justify;"><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;">At face value we could be forgiven to think that a broker with in-built message replay would have trouble achieving high throughput for large message volumes. After all, Kafka is retaining&nbsp;unconsumed&nbsp;as well as consumed messages on disk: presumably costlier than simply keeping unconsumed messages in memory. However, a <a href="http://kafka.apache.org/documentation.html#design" target="_blank">few</a> clever design decisions, such as relying on the OS page cache and minimising random disk I/O, gave LinkedIn engineers impressive throughput results when comparing Kafka against both ActiveMQ and RabbitMQ.</div><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;">With the basic concepts and performance considerations out of the way, let me illustrate my point about Kafka's suitability for Event Sourcing by giving a <a href="https://github.com/claudemamo/kafka-replays" target="_blank">code example</a>:</div></div><div style="text-align: justify;"><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;"><script src="https://gist.github.com/claudemamo/7840143.js?file=MyProducer.java"></script>The above producer publishes, for a number of times, a message to the topic <i>ossandme </i>on partition 0. In particular, it creates a message by instantiating the&nbsp;<i>KeyedMessage</i> class with the following parameters (line 19):</div></div><ul><li style="text-align: left;">Name of the topic to which the message is published.</li><li style="text-align: left;">ID of the partition the message will sit on.</li><li style="text-align: left;">Message content, in this case, the time the message was published.</li></ul><div style="text-align: justify;"><div style="text-align: left;">The following consumer pulls messages from the&nbsp;topic&nbsp;<i>ossandme</i>:</div></div><div style="text-align: justify;"><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;"><script src="https://gist.github.com/claudemamo/7840143.js?file=MyConsumer.java"></script>For each message received, the application outputs the message's offset on partition 0 in addition to its content (line 50). The first thing to observe is that I've programmed against Kafka's low-level&nbsp;<a href="http://kafka.apache.org/documentation.html#simpleconsumerapi" target="_blank">SimpleConsumer</a>&nbsp;API. Alternatively, I could have opted for the&nbsp;<a href="http://kafka.apache.org/documentation.html#highlevelconsumerapi" target="_blank">High Level Consumer</a>&nbsp;API to reduce development time. I chose the former because with the latter I was unable to find a way to replay any set of messages I wanted.&nbsp;</div></div><div style="text-align: justify;"><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;">Event Sourcing comes into play when an exception occurs. On exception, the application rewinds back to the first message in the partition and re-attempts to process all of the partition's messages (line 24). I like the fact that, to get this type of behaviour, I didn't have to introduce a database but simply leveraged the broker's message replay capability. Without a database, I've one less moving part to think about in my architecture.</div></div><div style="text-align: justify;"><div style="text-align: left;"><br /></div></div><div style="text-align: justify;"><div style="text-align: left;">Kafka is a young project and I'm interested to see how it matures. I'm keen to hear people's experiences using Kafka and whether it proved to be the right solution for them. As the project matures, I suspect we'll hear more often about Kafka in our technical discussions along with the other, more established, open source brokers.</div></div>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="http://oncodesign.io/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

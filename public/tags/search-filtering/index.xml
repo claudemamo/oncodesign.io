@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Search Filtering on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/search-filtering/</link>
+    <description>Recent content in Search Filtering on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jul 2013 12:59:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/search-filtering/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Rails Way to Search Filtering</title>
+      <link>http://oncodesign.io/2013/07/24/the-rails-way-to-search-filtering/</link>
+      <pubDate>Wed, 24 Jul 2013 12:59:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2013/07/24/the-rails-way-to-search-filtering/</guid>
+      <description>It&amp;rsquo;s been a while since my last post. Numerous changes took place in my professional life since then. I decided to take a break from my career and focus my energy to learning new technologies outside my area of expertise. One biggie is Ruby on Rails&amp;nbsp;3.
+To test my RoR as well as my UI skills, I created&amp;nbsp;evplore.com: a website for sharing, discovering and creating events. A requirement for evplore is to allow users to filter events by country, locality, tag, or date as shown below:</description>
+    </item>
+    
+  </channel>
+</rss>

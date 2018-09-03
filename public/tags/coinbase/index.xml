@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coinbase on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/coinbase/</link>
+    <description>Recent content in Coinbase on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Feb 2014 16:53:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/coinbase/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dynamically Create BitCoin Wallets &amp; Payment Pages on Coinbase in Ruby</title>
+      <link>http://oncodesign.io/2014/02/11/dynamically-create-bitcoin-wallets--payment-pages-on-coinbase-in-ruby/</link>
+      <pubDate>Tue, 11 Feb 2014 16:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/2014/02/11/dynamically-create-bitcoin-wallets--payment-pages-on-coinbase-in-ruby/</guid>
+      <description>Last weekend, as part of my new year&amp;rsquo;s resolution to dedicate some time to good causes, I participated in Hack4good: a global 48 hour hackathon aimed at bringing ideas for the social good into life. In Malta, our team brought forward a crowd funding solution for charitable fundraisers with minimal transaction fees. To this end, we selected BitCoin as the donation currency and Coinbase to host fundraise donations.
+One requirement in our project was to have Coinbase automatically issue a BitCoin wallet to each&amp;nbsp;fundraiser.</description>
+    </item>
+    
+  </channel>
+</rss>

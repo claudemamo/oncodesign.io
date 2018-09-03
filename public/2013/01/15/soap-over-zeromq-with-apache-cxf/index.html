@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.48" />
+
+
+<title>SOAP over ZeroMQ with Apache CXF - On Code &amp; Design</title>
+<meta property="og:title" content="SOAP over ZeroMQ with Apache CXF - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="http://oncodesign.io/" class="nav-logo"><img src="http://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">SOAP over ZeroMQ with Apache CXF</h1>
+
+    
+    <span class="article-date">January 1, 2013</span>
+    
+
+    <div class="article-content">
+      <p>You&rsquo;re probably asking yourself&nbsp;one of these two questions on reading this post&rsquo;s title:<br /><div><ol><li>Who in his right mind would use SOAP as a data format for <a href="http://www.zeromq.org/" target="_blank">ØMQ</a>?</li><li>Why the heck would I want to have SOAP on top of ØMQ as opposed to HTTP?</li></ol><div>For the first question, consider a system requiring:<br /><ul><li>A <a href="http://www.eaipatterns.com/ReturnAddress.html" target="_blank">return address</a> pattern such as the one offered by <a href="http://en.wikipedia.org/wiki/Java_Message_Service" target="_blank">JMS</a>&nbsp;and <a href="http://en.wikipedia.org/wiki/Microsoft_Message_Queuing" target="_blank">MSMQ</a>.</li><li>Guaranteed message delivery.&nbsp;</li><li>Encryption and authentication of messages.</li></ul></div><div>ØMQ wasn&rsquo;t designed to cover these requirements so it&rsquo;s up to the developer to come up with a solution.&nbsp;The developer can re-invent the wheel and build the solution from the ground up. But why do that when other folks have already taken the trouble of writing and implementing standards that address these concerns independent of the transport used? I&rsquo;m speaking of WS-<em>.&nbsp;Using a SOAP engine, we can leverage WS-</em> standards like WS-Addressing, WS-Security, and WS-ReliableMessaging to address the above requirements and more.&nbsp;</div><div><br /></div><div><div>Focusing on the second question, several motivations exist for using SOAP on top of ØMQ.&nbsp;The first that may pop into mind is the desire to reduce latency as&nbsp;ØMQ&nbsp;incurs less overhead than HTTP.&nbsp;For me, strong motivations include:</div><div><ul><li>Leveraging ØMQ&rsquo;s low-level and high-level patterns such as publish-subscribe and pipeline.&nbsp;</li><li>Dispatching messages to services while they&rsquo;re in a disconnected state.</li></ul></div></div><div><br />With the &ldquo;Why?&rdquo; out of the way, let&rsquo;s figure out the &ldquo;How?&rdquo;. That is, how to process SOAP messages over ØMQ. <a href="http://cxf.apache.org/" target="_blank">Apache CXF</a> is an open-source Java SOAP engine that operates over transports such as JMS, UDP, and of course HTTP. During the holidays, since I had lot of free time on my hands ;-), I extended CXF to support <a href="https://github.com/claudemamo/cxf-rt-transports-zeromq" target="_blank">ØMQ as an additional transport</a>.&nbsp;</div><div><br />What follows is an example of a Web Service and a client talking with each other over the transport [1]. Consider this WSDL fragment that I wrote, and which the service and client are based on:</div><div><br /></div><div><script src="https://gist.github.com/claudemamo/4540611.js?file=hello_world.wsdl"></script></div><div>The contract describes a service that publishes a single operation called <i>sayHi</i>. <i>sayHi</i> accepts an empty message and returns a string.&nbsp;Line 29 of the WSDL informs us that the service expects <i>sayHi</i> to be invoked using SOAP over ØMQ. Line 43 tells us the service address whereas lines 44-45 give additional&nbsp;necessary&nbsp;details for the client and service to establish communication. Observe that I&rsquo;m using socket types <i>req</i>&nbsp;and <i>rep</i> for the client and service respectively. This means that the communication between client and service occurs in RPC-style.</div><div><br />I use the&nbsp;the&nbsp;<i>wsdl2java</i>&nbsp;tool that comes with the Apache CXF distribution to generate SEI and proxy classes from the above WSDL. These classes help me develop the WSDL service implementation and the client.<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=generate.sh"></script></div>Next, I implement the service:<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=GreeterImpl.java"></script>The service is published using the following code:<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=Server.java"></script>From the consumer-side, here&rsquo;s the code:<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=Client.java"></script>I write an additional class that triggers the execution of the service and its consumer:</div><div><br /></div><div><script src="https://gist.github.com/claudemamo/4540611.js?file=Main.java"></script></div><div>I use Maven from the project&rsquo;s root directory to build the example:<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=build.sh"></script>Finally, to run the app:<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=run.sh"></script>The output I get is:<br /><br /><script src="https://gist.github.com/claudemamo/4540611.js?file=gistfile1.txt"></script>You&rsquo;ll find the complete <a href="https://github.com/claudemamo/zmq-soap" target="_blank">example</a> on GitHub.&nbsp;This example is basic; its purpose is to get you up and running with the transport. In my next post I&rsquo;ll have a more real-world example where I&rsquo;ll show how WS-Addressing&rsquo;s ReplyTo element is be leveraged to implement the return address pattern in&nbsp;ØMQ.<br /><br /><div style="text-align: justify;"><span style="font-family: Times, Times New Roman, serif; font-size: small;"><span class="num">1:&nbsp;</span></span><span style="font-family: Times, Times New Roman, serif;">You need the <a href="https://github.com/zeromq/jzmq/archive/2.1.0.tar.gz" target="_blank">Java binding for ØMQ</a>&nbsp;installed on your machine to run the example.</span></div></div></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="http://oncodesign.io/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

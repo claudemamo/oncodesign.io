@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.48" />
+
+
+<title>ReplyTo in ZeroMQ using WS-Addressing - On Code &amp; Design</title>
+<meta property="og:title" content="ReplyTo in ZeroMQ using WS-Addressing - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="http://oncodesign.io/" class="nav-logo"><img src="http://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">ReplyTo in ZeroMQ using WS-Addressing</h1>
+
+    
+    <span class="article-date">January 1, 2013</span>
+    
+
+    <div class="article-content">
+      <p>In my <a href="http://opensourcesoftwareandme.blogspot.com/2013/01/soap-over-zeromq-with-apache-cxf.html" target="_blank">last post</a>, I mentioned how one could leverage SOAP along with WS-Addressing to implement the <a href="http://www.eaipatterns.com/ReturnAddress.html" target="_blank">return address pattern</a> in&nbsp;ØMQ&nbsp;(known in the JMS world as&nbsp;<i>ReplyTo</i>&nbsp;and in the MSMQ world as&nbsp;<i>ResponseQueue</i>). In this post, I&rsquo;ll go into more detail by giving a code example using <a href="https://github.com/claudemamo/cxf-rt-transports-zeromq" target="_blank">CXF&rsquo;s ØMQ transport</a>.<br /><br />Below is a WSDL that is similar in many respects to the WSDL of the previous post:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=hello_world_addr.wsdl"></script>Like the other WSDL, this one declares that the service has an operation named <i>sayHi</i>. It states that&nbsp;ØMQ&nbsp;is to be used for transporting the SOAP messages (line 29). Moreover, it declares the service and consumer communication parameters:&nbsp;<i>zmq:address;</i>&nbsp;<i>zmq:serviceConfig;</i>&nbsp;<i>zmq:clientConfig</i> (lines 43-45).&nbsp;<b>Unlike</b> the other WSDL, the socket types are <i>push</i> for the client and <i>pull</i> for the service. This means that communication between the client and service is one-way and therefore the client won&rsquo;t receive a reply, at least not on the same channel. Remember, since we&rsquo;re implementing return address, the service sends its reply onto a different channel.<br /><br />This is the shell command I entered for generating the SEI and proxy classes:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=generate-client.sh"></script>The <i>-asyncMethods</i> switch tells CXF&rsquo;s <i>wsdl2java</i> to generate, in the SEI, for each Web Service operation an asynchronous method in addition to a synchronous one. In the consumer implementation, I use the generated SEI:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=Client.java"></script><i>doOperation()&nbsp;</i>sequence of events is as follows:<br /><ol><li>Publishes the endpoint that processes the service&rsquo;s async reply (line 10).</li><br /><li>Creates a client that has WS-Addressing enabled (lines 13-14).</li><br /><li>Adds the <i>ReplyTo</i>&nbsp;element &nbsp;to the request&rsquo;s SOAP header (lines 17-18). The element contains the callback URL that the service will read in order to know to whom it should deliver its response and how it should deliver it.</li><br /><li>Calls asynchronously the SEI method&nbsp;<i>sayHiAsync()</i>&nbsp;(line 21).&nbsp;If the consumer invokes the synchronous&nbsp;method (i.e., <i>sayHi()</i>) instead of the async one, the&nbsp;consumer&nbsp;would block indefinitely after sending out the request because it will wait for a reply that it will never receive.</li></ol>The endpoint consuming the service&rsquo;s reply is a plain Web Service:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=Callback.java"></script>The callback terminates the program as soon as it processes the reply.<br /><br />I re-run <i>wsdl2java</i>&nbsp;to generate another SEI but using the following arguments:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=generate-server.sh"></script>I use the SEI generated from the above command to implement the service:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=GreeterImpl.java"></script>Nothing special about <i>GreeterImpl.java</i> except the <i>@Addressing</i> annotation. This annotation is required for CXF to process the request&rsquo;s WS-Addressing headers.<br /><br /><i>Main.java</i> triggers the server and consumer into action:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=Main.java"></script>The complete application is on&nbsp;<a href="https://github.com/claudemamo/zmq-replyto-soap" target="_blank">GitHub</a>.&nbsp;The instructions for running the demo are almost identical to the ones of the previous post. First enter the following Maven command from the project&rsquo;s root directory: <br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=build.sh"></script>Then run the demo using the <i>java</i> command:<br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=run.sh"></script>You should then get the following output: <br /><br /><script src="https://gist.github.com/claudemamo/4577639.js?file=gistfile1.txt"></script></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="http://oncodesign.io/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

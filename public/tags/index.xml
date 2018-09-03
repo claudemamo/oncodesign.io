@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on On Code &amp; Design</title>
+    <link>http://oncodesign.io/tags/</link>
+    <description>Recent content in Tags on On Code &amp; Design</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Aug 2012 12:04:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://oncodesign.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android</title>
+      <link>http://oncodesign.io/tags/android/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Angularjs</title>
+      <link>http://oncodesign.io/tags/angularjs/</link>
+      <pubDate>Wed, 19 Feb 2014 15:21:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/angularjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Anti Pattern</title>
+      <link>http://oncodesign.io/tags/anti-pattern/</link>
+      <pubDate>Wed, 09 Dec 2015 11:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/anti-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apache Cxf</title>
+      <link>http://oncodesign.io/tags/apache-cxf/</link>
+      <pubDate>Sat, 10 Aug 2013 20:07:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/apache-cxf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apache Kafka</title>
+      <link>http://oncodesign.io/tags/apache-kafka/</link>
+      <pubDate>Sat, 19 Sep 2015 13:31:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/apache-kafka/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>As2</title>
+      <link>http://oncodesign.io/tags/as2/</link>
+      <pubDate>Fri, 15 May 2015 02:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/as2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bitcoin</title>
+      <link>http://oncodesign.io/tags/bitcoin/</link>
+      <pubDate>Tue, 11 Feb 2014 16:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/bitcoin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>http://oncodesign.io/tags/blog/</link>
+      <pubDate>Sun, 10 Jul 2016 20:04:36 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C#</title>
+      <link>http://oncodesign.io/tags/c/</link>
+      <pubDate>Tue, 27 Aug 2013 17:36:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Clustering</title>
+      <link>http://oncodesign.io/tags/clustering/</link>
+      <pubDate>Fri, 03 Aug 2012 10:15:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/clustering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coinbase</title>
+      <link>http://oncodesign.io/tags/coinbase/</link>
+      <pubDate>Tue, 11 Feb 2014 16:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/coinbase/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cordova</title>
+      <link>http://oncodesign.io/tags/cordova/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/cordova/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cxf</title>
+      <link>http://oncodesign.io/tags/cxf/</link>
+      <pubDate>Thu, 20 Dec 2012 22:17:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/cxf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>http://oncodesign.io/tags/database/</link>
+      <pubDate>Fri, 23 Sep 2016 14:29:41 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dense_rank</title>
+      <link>http://oncodesign.io/tags/dense_rank/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/dense_rank/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Drools</title>
+      <link>http://oncodesign.io/tags/drools/</link>
+      <pubDate>Mon, 10 Aug 2015 15:12:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/drools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dynamic Port</title>
+      <link>http://oncodesign.io/tags/dynamic-port/</link>
+      <pubDate>Mon, 28 May 2012 20:43:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/dynamic-port/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Etl</title>
+      <link>http://oncodesign.io/tags/etl/</link>
+      <pubDate>Wed, 09 Dec 2015 11:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/etl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Sourcing</title>
+      <link>http://oncodesign.io/tags/event-sourcing/</link>
+      <pubDate>Wed, 11 Dec 2013 21:01:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/event-sourcing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flyway</title>
+      <link>http://oncodesign.io/tags/flyway/</link>
+      <pubDate>Fri, 23 Sep 2016 14:29:41 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/flyway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ftp</title>
+      <link>http://oncodesign.io/tags/ftp/</link>
+      <pubDate>Fri, 03 Aug 2012 10:15:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/ftp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Github Pages</title>
+      <link>http://oncodesign.io/tags/github-pages/</link>
+      <pubDate>Sun, 10 Jul 2016 20:04:36 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/github-pages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hibernate</title>
+      <link>http://oncodesign.io/tags/hibernate/</link>
+      <pubDate>Wed, 14 Nov 2012 21:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/hibernate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How To</title>
+      <link>http://oncodesign.io/tags/how-to/</link>
+      <pubDate>Thu, 20 Dec 2012 22:17:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/how-to/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://oncodesign.io/tags/hugo/</link>
+      <pubDate>Sun, 10 Jul 2016 20:04:36 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hyperjaxb3</title>
+      <link>http://oncodesign.io/tags/hyperjaxb3/</link>
+      <pubDate>Wed, 14 Nov 2012 21:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/hyperjaxb3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Iso 8583</title>
+      <link>http://oncodesign.io/tags/iso-8583/</link>
+      <pubDate>Wed, 13 Jun 2012 11:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/iso-8583/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://oncodesign.io/tags/java/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java Nio</title>
+      <link>http://oncodesign.io/tags/java-nio/</link>
+      <pubDate>Mon, 23 Dec 2013 11:38:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/java-nio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jax Rs</title>
+      <link>http://oncodesign.io/tags/jax-rs/</link>
+      <pubDate>Thu, 20 Dec 2012 22:17:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jax-rs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jax Ws</title>
+      <link>http://oncodesign.io/tags/jax-ws/</link>
+      <pubDate>Wed, 19 Dec 2012 07:56:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jax-ws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jaxb</title>
+      <link>http://oncodesign.io/tags/jaxb/</link>
+      <pubDate>Wed, 14 Nov 2012 21:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jaxb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jersey</title>
+      <link>http://oncodesign.io/tags/jersey/</link>
+      <pubDate>Mon, 25 Mar 2013 15:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jersey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jose.4.j</title>
+      <link>http://oncodesign.io/tags/jose.4.j/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jose.4.j/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jpa</title>
+      <link>http://oncodesign.io/tags/jpa/</link>
+      <pubDate>Wed, 14 Nov 2012 21:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jpa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jqm</title>
+      <link>http://oncodesign.io/tags/jqm/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jqm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jquery</title>
+      <link>http://oncodesign.io/tags/jquery/</link>
+      <pubDate>Sat, 02 Mar 2013 12:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jquery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jquery Mobile</title>
+      <link>http://oncodesign.io/tags/jquery-mobile/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jquery-mobile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jruby</title>
+      <link>http://oncodesign.io/tags/jruby/</link>
+      <pubDate>Mon, 19 Aug 2013 11:41:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Json</title>
+      <link>http://oncodesign.io/tags/json/</link>
+      <pubDate>Sat, 02 Mar 2013 12:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/json/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Json Web Token</title>
+      <link>http://oncodesign.io/tags/json-web-token/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/json-web-token/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Junit 4</title>
+      <link>http://oncodesign.io/tags/junit-4/</link>
+      <pubDate>Mon, 22 Oct 2012 18:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/junit-4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jwt</title>
+      <link>http://oncodesign.io/tags/jwt/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/jwt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kafka</title>
+      <link>http://oncodesign.io/tags/kafka/</link>
+      <pubDate>Wed, 11 Dec 2013 21:01:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/kafka/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Log4j 2</title>
+      <link>http://oncodesign.io/tags/log4j-2/</link>
+      <pubDate>Mon, 23 Dec 2013 11:38:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/log4j-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Maven</title>
+      <link>http://oncodesign.io/tags/maven/</link>
+      <pubDate>Mon, 22 Oct 2012 18:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/maven/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Messaging</title>
+      <link>http://oncodesign.io/tags/messaging/</link>
+      <pubDate>Wed, 09 Dec 2015 11:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/messaging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Msmq</title>
+      <link>http://oncodesign.io/tags/msmq/</link>
+      <pubDate>Tue, 27 Aug 2013 17:36:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/msmq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mule</title>
+      <link>http://oncodesign.io/tags/mule/</link>
+      <pubDate>Fri, 15 May 2015 02:09:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/mule/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mule 3</title>
+      <link>http://oncodesign.io/tags/mule-3/</link>
+      <pubDate>Tue, 07 Jan 2014 14:01:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/mule-3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mule Transport Zeromq</title>
+      <link>http://oncodesign.io/tags/mule-transport-zeromq/</link>
+      <pubDate>Sun, 24 Jun 2012 19:17:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/mule-transport-zeromq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mule Zeromq Transport</title>
+      <link>http://oncodesign.io/tags/mule-zeromq-transport/</link>
+      <pubDate>Tue, 27 Aug 2013 17:36:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/mule-zeromq-transport/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>One to Many</title>
+      <link>http://oncodesign.io/tags/one-to-many/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/one-to-many/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pagination</title>
+      <link>http://oncodesign.io/tags/pagination/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/pagination/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Phonegap</title>
+      <link>http://oncodesign.io/tags/phonegap/</link>
+      <pubDate>Sat, 18 Aug 2012 12:04:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/phonegap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Postgresql</title>
+      <link>http://oncodesign.io/tags/postgresql/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Raml</title>
+      <link>http://oncodesign.io/tags/raml/</link>
+      <pubDate>Fri, 25 Sep 2015 14:56:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/raml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Replicas</title>
+      <link>http://oncodesign.io/tags/replicas/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/replicas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Replication</title>
+      <link>http://oncodesign.io/tags/replication/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/replication/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Replyto</title>
+      <link>http://oncodesign.io/tags/replyto/</link>
+      <pubDate>Sun, 27 Jan 2013 17:22:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/replyto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rest</title>
+      <link>http://oncodesign.io/tags/rest/</link>
+      <pubDate>Mon, 25 Mar 2013 15:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/rest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rest Module</title>
+      <link>http://oncodesign.io/tags/rest-module/</link>
+      <pubDate>Wed, 18 Jul 2012 09:55:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/rest-module/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rest Router</title>
+      <link>http://oncodesign.io/tags/rest-router/</link>
+      <pubDate>Mon, 25 Mar 2013 15:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/rest-router/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>http://oncodesign.io/tags/ruby/</link>
+      <pubDate>Sat, 10 Aug 2013 20:07:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby on Rails</title>
+      <link>http://oncodesign.io/tags/ruby-on-rails/</link>
+      <pubDate>Tue, 11 Feb 2014 16:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/ruby-on-rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Search Filtering</title>
+      <link>http://oncodesign.io/tags/search-filtering/</link>
+      <pubDate>Wed, 24 Jul 2013 12:59:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/search-filtering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Smooks</title>
+      <link>http://oncodesign.io/tags/smooks/</link>
+      <pubDate>Tue, 16 Sep 2014 17:28:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/smooks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Soap</title>
+      <link>http://oncodesign.io/tags/soap/</link>
+      <pubDate>Sat, 10 Aug 2013 20:07:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/soap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Soapui</title>
+      <link>http://oncodesign.io/tags/soapui/</link>
+      <pubDate>Mon, 22 Oct 2012 18:23:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/soapui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Integration</title>
+      <link>http://oncodesign.io/tags/spring-integration/</link>
+      <pubDate>Sat, 26 May 2012 11:53:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/spring-integration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Mvc</title>
+      <link>http://oncodesign.io/tags/spring-mvc/</link>
+      <pubDate>Sat, 02 Mar 2013 12:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/spring-mvc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sql</title>
+      <link>http://oncodesign.io/tags/sql/</link>
+      <pubDate>Sat, 22 Apr 2017 09:33:52 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tokens</title>
+      <link>http://oncodesign.io/tags/tokens/</link>
+      <pubDate>Mon, 09 Nov 2015 13:42:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/tokens/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Triggers</title>
+      <link>http://oncodesign.io/tags/triggers/</link>
+      <pubDate>Fri, 23 Sep 2016 14:29:41 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/triggers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wadl</title>
+      <link>http://oncodesign.io/tags/wadl/</link>
+      <pubDate>Mon, 25 Mar 2013 15:37:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/wadl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Services</title>
+      <link>http://oncodesign.io/tags/web-services/</link>
+      <pubDate>Sat, 10 Aug 2013 20:07:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/web-services/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Websocket</title>
+      <link>http://oncodesign.io/tags/websocket/</link>
+      <pubDate>Fri, 06 Jul 2012 17:14:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/websocket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ws Addressing</title>
+      <link>http://oncodesign.io/tags/ws-addressing/</link>
+      <pubDate>Sun, 27 Jan 2013 17:22:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/ws-addressing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment</title>
+      <link>http://oncodesign.io/tags/zero-downtime-deployment/</link>
+      <pubDate>Fri, 23 Sep 2016 14:29:41 +0200</pubDate>
+      
+      <guid>http://oncodesign.io/tags/zero-downtime-deployment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zeromq</title>
+      <link>http://oncodesign.io/tags/zeromq/</link>
+      <pubDate>Tue, 27 Aug 2013 17:36:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/zeromq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zmq</title>
+      <link>http://oncodesign.io/tags/zmq/</link>
+      <pubDate>Tue, 27 Aug 2013 17:36:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/zmq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ømq</title>
+      <link>http://oncodesign.io/tags/%C3%B8mq/</link>
+      <pubDate>Sun, 27 Jan 2013 17:22:00 +0000</pubDate>
+      
+      <guid>http://oncodesign.io/tags/%C3%B8mq/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
