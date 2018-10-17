@@ -16,7 +16,7 @@ The other day I read a simple yet thought-provoking thread on a message board. A
 
 * Documents or parts of the document need to be routed to the correct systems.
 <br/><br/>
-<img src="/images/the-many-facets-of-edi-integration.jpg" alt="EDI Integration"/>
+<img src="/images/the-many-facets-of-edi-integration.jpg" alt="Typical EDI integration solution"/>
 
 Having given an idea of the complete picture, it’s understandable to assume that simply translating documents to and from EDI will likely be a far cry from making one’s first EDI integration a success.
 
