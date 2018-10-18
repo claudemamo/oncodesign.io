@@ -145,6 +145,10 @@ a {
   transition: background 150ms ease;
 }
 
+.article-content img {
+  width: 100%;
+}
+
 .article-content a:hover,
 .article-content a:focus {
   background: #CBF8DF;

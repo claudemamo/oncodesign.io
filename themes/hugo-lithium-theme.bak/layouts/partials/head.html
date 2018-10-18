@@ -1,0 +1,38 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ .Hugo.Generator }}
+
+{{ if eq .URL "/" }}
+<title>{{ .Title }}</title>
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Site.BaseURL }}">
+{{ else }}
+<title>{{ .Title }} - {{ .Site.Title }}</title>
+<meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">
+<meta property="og:type" content="article" />
+{{ end }}
+
+{{ if eq .URL "/" }}
+<meta property="og:description" content="{{ .Site.Params.description }}">
+<meta property="description" content="{{ .Site.Params.description }}">
+{{ else }}
+  {{ if .Description }}
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="description" content="{{ .Description }}">
+  {{ end }}
+{{ end }}
+
+{{ if .Keywords }}
+<meta property="keywords" content ="{{ delimit .Keywords ", " }}">
+{{ end }}
+
+{{ if .RSSLink }}
+<link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+{{ end }}
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ .Site.BaseURL }}css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
