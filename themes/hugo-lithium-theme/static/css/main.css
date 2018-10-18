@@ -302,6 +302,10 @@ a {
     text-align: left;
   }
 
+  .archive-date {
+    font-size: 32px;
+  }
+
   .archive-title {
     font-size: 38px;
   }

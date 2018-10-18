@@ -1,7 +1,7 @@
 +++
 date = "2018-10-17T10:00:00+01:00"
 title = "The Many Facets of EDI Integration"
-tags = ["EDI"]
+tags = ["EDI", "B2B"]
 +++
 
 *This post was reproduced on [PortX's blog](https://portx.io/the-many-facets-of-edi-integration/)*.
