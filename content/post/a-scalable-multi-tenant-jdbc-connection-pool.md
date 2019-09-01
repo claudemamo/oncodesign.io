@@ -4,7 +4,7 @@ date = 2019-09-01T09:54:34+02:00
 tags = ["JDBC", "database", "multi-tenancy", "connection pool"]
 +++
 
-Multi-tenancy is a frequent requirement when architecting distributed systems. A question one ought to ask is how will the system restrict a tenant’s use of resources. Afterall, without restrictions and given a finite amount of resources, letting a tenant run wild on the APIs will certainly degrade the performance of other active tenants. The answer to this question will take different forms depending on which part of the technology stack is discussed. This question was posed to me for the data access layer, in particular, how to limit the JDBC database connections a tenant may acquire.
+Multi-tenancy is a frequent requirement when architecting distributed systems. A question one ought to ask is how will the system restrict a tenant’s use of resources. After all, without restrictions and given a finite amount of resources, letting a tenant run wild on the APIs will certainly degrade the performance of other active tenants. The answer to this question will take different forms depending on which part of the technology stack is discussed. This question was posed to me for the data access layer, in particular, how to limit the JDBC database connections a tenant may acquire.
 
 <img src="/images/connection-pool-per-tenant.jpg" alt="Connection pool per tenant" style="max-width:70%"/>
 
