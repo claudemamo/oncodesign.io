@@ -1,4 +1,4 @@
-baseurl = "http://oncodesign.io/"
+baseurl = "https://oncodesign.io/"
 languageCode = "en-us"
 title = "On Code & Design"
 theme = "hugo-lithium-theme"
