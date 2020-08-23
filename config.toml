@@ -4,12 +4,14 @@ title = "On Code & Design"
 theme = "hugo-lithium-theme"
 googleAnalytics = "UA-80349200-1"
 disqusShortname = "oncodesign"
+disableKinds = ["taxonomy", "taxonomyTerm", "section", "404"]
 
 [permalinks]
     post = "/:year/:month/:day/:filename/"
     page = "/:title/"
 
 [params]
+    mainSections = ["post"]
     description = "An anarchist's thoughts on code, design, and everything else"
 
 [params.logo]
