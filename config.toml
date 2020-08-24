@@ -5,6 +5,7 @@ theme = "hugo-lithium-theme"
 googleAnalytics = "UA-80349200-1"
 disqusShortname = "oncodesign"
 disableKinds = ["taxonomy", "taxonomyTerm", "section", "404"]
+staticDir = ["static"]
 
 [permalinks]
     post = "/:year/:month/:day/:filename/"
@@ -18,3 +19,7 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section", "404"]
     url = "avatar.png"
     width = 50
     height = 50
+
+[markup.goldmark]
+    [markup.goldmark.renderer]
+        unsafe= true
