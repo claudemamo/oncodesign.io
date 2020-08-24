@@ -4,7 +4,7 @@ date = 2020-08-24T08:15:00+02:00
 tags = ["Smooks", "DFDL", "Apache Daffodil", "2.0.0-M1"]
 +++
 
-<img src="/images/smooks-logo.png" alt="Connection pool per tenant" style="max-width:70%"/>
+<img src="/images/smooks-logo.png" alt="Smooks logo" style="max-width:70%"/>
 
 Following my [short stint](https://oncodesign.io/2014/09/16/the-trials-of-smooks/) with [Smooks](https://www.smooks.org/), I joined its developer community to contribute back. As technologies like [Apache 
 Daffodil](https://daffodil.apache.org/) mature, Smooks has become more relevant today than it ever was. Thanks to the guidance of Smooks creator [Tom Fennelly](https://github.com/tfennelly), 
