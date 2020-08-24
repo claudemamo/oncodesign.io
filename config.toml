@@ -20,6 +20,5 @@ staticDir = ["static"]
     width = 50
     height = 50
 
-[markup.goldmark]
-    [markup.goldmark.renderer]
-        unsafe= true
+[markup.goldmark.renderer]
+    unsafe= true
