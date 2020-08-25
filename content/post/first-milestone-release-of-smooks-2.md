@@ -28,6 +28,6 @@ there are breaking changes like the dropping of support for Java 7. What follows
 * Maven coordinates change
     * We are now publishing artifacts under Maven group IDs prefixed with "org.smooks".
 
-Head over to Smooks’s extensive [catalogue of examples](https://github.com/smooks/smooks-examples/tree/v1.0.0) to get yourself started on 2.0.0-M1. The next milestone release 
+Head on over to Smooks’s extensive [catalogue of examples](https://github.com/smooks/smooks-examples/tree/v1.0.0) to get yourself started on 2.0.0-M1. The next milestone release 
 will simplify Smooks’s API, restructure its internals in order to make it more extensible, as well as add nifty constructs 
 for common use cases so stay tuned.
