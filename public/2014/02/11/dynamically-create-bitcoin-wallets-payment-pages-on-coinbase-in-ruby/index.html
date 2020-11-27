@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+<title>Dynamically Create BitCoin Wallets &amp; Payment Pages on Coinbase in Ruby - On Code &amp; Design</title>
+<meta property="og:title" content="Dynamically Create BitCoin Wallets &amp; Payment Pages on Coinbase in Ruby - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="https://oncodesign.io/" class="nav-logo"><img src="https://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Dynamically Create BitCoin Wallets &amp; Payment Pages on Coinbase in Ruby</h1>
+
+    
+    <span class="article-date">February 11, 2014</span>
+    
+
+    <div class="article-content">
+      <p>Last weekend, as part of my new year&rsquo;s resolution to dedicate some time to good causes, I participated in <a href="http://hack4good.io/" target="_blank">Hack4good</a>: a global 48 hour hackathon aimed at bringing ideas for the social good into life. In Malta, our team brought forward a crowd funding solution for charitable fundraisers with <b>minimal</b> transaction fees. To this end, we selected <a href="https://www.youtube.com/watch?v=Um63OQz3bjo" target="_blank">BitCoin</a> as the donation currency and <a href="https://coinbase.com/" target="_blank">Coinbase</a> to host fundraise donations.<br /><br />One requirement in our project was to have Coinbase automatically issue a BitCoin wallet to each fundraiser. To further complicate matters, we wanted to generate a Coinbase payment page that allows the donor to transfer his BitCoins to the fundraiser&rsquo;s wallet:<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-9URc-UR2bBg/UvouzVJqjUI/AAAAAAAAAHY/VTX_OUmsRW4/s1600/coinbase-payment-page.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-9URc-UR2bBg/UvouzVJqjUI/AAAAAAAAAHY/VTX_OUmsRW4/s1600/coinbase-payment-page.png" height="400" width="392" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><a href="https://coinbase.com/api/doc" target="_blank">Coinbase&rsquo;s awesome API</a> permitted us to do both things with very little effort. Since we developed the solution in Ruby on Rails 4, I&rsquo;ll show you the code of how we accomplished this using a <a href="https://github.com/claudemamo/coinbase-ruby" target="_blank">forked version of Coinbase API&rsquo;s Ruby client</a> [1]:<br /><br /><script src="https://gist.github.com/claudemamo/8918100.js?file=fundraiser_controller(1).rb"></script>The <i>create()</i> controller action does numerous things so let&rsquo;s dissect it piece by piece. The action instantiates the Coinbase client with our API key: this key is created in Coinbase&rsquo;s account settings page. The client object&rsquo;s <i>create_user(&hellip;)</i> method is then invoked to make a wallet in addition to a Coinbase account for the fundraiser. The email address and password parameters are used by the end-user to access his fundraiser wallet on Coinbase. <i>COINBASE_CLIENT_SECRET</i>, linked to our API key, is passed as a parameter so that we can automatically grant ourselves merchant permissions on the created user account. These permissions are needed to dynamically generate the payment page on behalf of the user.<br /><br />Making the call to Coinbase to generate the payment page requires that we follow the OAuth 2 protocol [2]. Fortunately, an <a href="https://rubygems.org/gems/oauth2" target="_blank">OAuth 2 Ruby library</a> exists. So we go ahead and use the library to instantiate an OAuth client, passing <i>COINBASE_API_KEY</i> and <i>COINBASE_API_SECRET</i> as parameters. Before we ask Coinbase to create a payment page on the user&rsquo;s behalf, an <i>AccessToken</i> object is constructed with the access token obtained from <i>coinbase</i>.<i>create_user(&hellip;)</i> and the OAuth client we have just instantiated. After this, we use the newly constructed <i>oauth_token</i> object to post a request to <i><a href="https://coinbase.com/api/v1/buttons">https://coinbase.com/api/v1/buttons</a>.</i> Note that <i>JSON_CREATE_PAYMENT_PAGE</i>&rsquo;s value is sent as the HTTP body.<br /><br />All I need from the JSON response returned from the API call is the payment page code. This code lets Coinbase know which payment page to display. We persist this code along with the fundraiser details so that we can retrieve them later when we show the fundraiser to a potential donor:<br /><br /><script src="https://gist.github.com/claudemamo/8918100.js?file=fundraiser_controller(2).rb"></script>Here is view associated with the above action:<br /><br /><script src="https://gist.github.com/claudemamo/8918100.js?file=show.html.erb"></script>The view gets the page code from <i>@fundraiser.coinbase_page_code</i> and sets the necessary HTML attributes with this value. <i>button.js</i> is a script provided by Coinbase that styles the anchor element and opens the fundraising donation page tied to the page code when the anchor is clicked:<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/-216Y0Y3NHe8/Uvoo9rAJu5I/AAAAAAAAAHM/yQWlxI-KSEE/s1600/donation_large.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-216Y0Y3NHe8/Uvoo9rAJu5I/AAAAAAAAAHM/yQWlxI-KSEE/s1600/donation_large.png" /></a></div><br />The final step is to add the OAuth 2 and Coinbase dependencies to the project Gemfile:<br /><br /><script src="https://gist.github.com/claudemamo/8918100.js?file=Gemfile"></script><br /><div style="text-align: justify;"><span class="num" style="font-family: Times, 'Times New Roman', serif;">1: We forked <a href="https://github.com/coinbase/coinbase-ruby" target="_blank">Coinbase&rsquo;s Ruby client</a> because <i>create_user(&hellip;)</i> didn&rsquo;t support <a href="https://coinbase.com/api/doc/1.0/users/create.html" target="_blank">client ID</a>.</span></div><div style="text-align: justify;"><span class="num" style="font-family: Times, 'Times New Roman', serif;">2: You need to register your application on Coinbase before you can gain rights to manage user accounts through OAuth. </span></div></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

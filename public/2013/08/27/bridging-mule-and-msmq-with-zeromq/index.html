@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+<title>Bridging Mule and MSMQ with ZeroMQ - On Code &amp; Design</title>
+<meta property="og:title" content="Bridging Mule and MSMQ with ZeroMQ - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="https://oncodesign.io/" class="nav-logo"><img src="https://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Bridging Mule and MSMQ with ZeroMQ</h1>
+
+    
+    <span class="article-date">August 27, 2013</span>
+    
+
+    <div class="article-content">
+      <p>Hearing the words Mule and Microsoft&rsquo;s MSMQ in the same sentence sends a shiver down my spine. I remember once, Mule guru <a href="http://blogs.mulesoft.org/author/john-demic/" target="_blank">John D&rsquo;Emic</a> and me had spent a considerable amount of time and patience getting Mule and MSMQ to talk to each other through DCOM. The major factor that contributed to this unpleasant experience was our ignorance of the numerous security measures imposed by Windows to restrict DCOM access. The morale of this story is unless you have a veteran Windows administrator at your disposal, avoid the DCOM route.<br /><br />So which choices do we have other than DCOM? JNI sounds promising but you are then sacrificing Mule&rsquo;s platform independence. Here&rsquo;s an idea: introduce a <a href="http://www.eaipatterns.com/MessagingBridge.html" target="_blank">messaging bridge</a> between Mule and MSMQ. The bridge can be implemented in any language that facilitates interaction with MSMQ. C# is an attractive option.<br /><br />We still have to consider which middleware to use for exchanging messages between the bridge and Mule. There are many alternatives and among them is <a href="http://zeromq.org/" target="_blank">ZeroMQ</a>. I think ZeroMQ is a good candidate for several reasons:<br /><ul><li>It supports asynchronous communication</li><li>You&rsquo;re not adding another component to your architecture</li><li>It&rsquo;s well documented in addition to having a low learning curve</li><li>A ZeroMQ <a href="https://github.com/claudemamo/mule-transport-zeromq" target="_blank">transport</a> [1] and <a href="https://github.com/zeromq/clrzmq" target="_blank">binding</a> are available for Mule and C# respectively</li><li>It will more than likely satisfy your message throughput requirements</li></ul>In as little as 15 minutes I developed a simple bridge in C#:<br /><br /><script src="https://gist.github.com/claudemamo/6345631.js?file=bridge.cs"></script> The above code should be self-explanatory but I&rsquo;ve put comments for your convenience.<br /><br />Here&rsquo;s the Mule 3 app dispatching messages to the bridge:<br /><br /><script src="https://gist.github.com/claudemamo/6345631.js?file=mule-config.xml"></script>On receiving an HTTP request, Mule leverages the ZeroMQ transport to send asynchronously the request&rsquo;s payload to the bridge.<br /><br />In all likelihood, the illustrated bridge code for Mule-MSMQ interoperability won&rsquo;t serve all your needs. I can think about a dozen features that a developer would want such as destination queues resolved at run-time, an agreed format for message content, and etc. But hey, at least it&rsquo;s a start :-)<br /><br /><div style="text-align: justify;"><span style="font-family: Times, Times New Roman, serif; font-size: small;"><span class="num">1: </span></span><span style="font-family: Times, Times New Roman, serif;">I&rsquo;ve recently replaced the transport&rsquo;s ZeroMQ C++ library with a <a href="https://github.com/zeromq/jeromq" target="_blank">pure Java implementation</a> of ZeroMQ.</span></div></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

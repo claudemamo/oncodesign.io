@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+<title>Demystifying Apache CXF: A RESTful Hello World App - On Code &amp; Design</title>
+<meta property="og:title" content="Demystifying Apache CXF: A RESTful Hello World App - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="https://oncodesign.io/" class="nav-logo"><img src="https://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Demystifying Apache CXF: A RESTful Hello World App</h1>
+
+    
+    <span class="article-date">December 20, 2012</span>
+    
+
+    <div class="article-content">
+      <p>The <a href="http://opensourcesoftwareandme.blogspot.com/2012/12/demystifying-apache-cxf-hello-world-app.html#.UNNCD4njl7s" target="_blank">first post</a> of this how-to series showed you what it takes to expose a Hello World application as a SOAP over HTTP Web Service using CXF. For this post, I&rsquo;ll show you how to expose the same <a href="https://github.com/claudemamo/cxf-howto-2" target="_blank">app as a RESTful service</a>.<br /><br />In the Java world, we use JAX-RS for mapping a class to a RESTful service. Giving a RESTful interface to our Hello World app is just a matter of adding JAX-RS annotations to <i>HelloWorldImpl</i>:<br /><br /><script src="https://gist.github.com/claudemamo/4346702.js?file=HelloWorldImpl.java"></script>In the class, I tell the JAX-RS provider (i.e., CXF):<br /><ul><li><i>HelloWorldImpl</i> is a resource available on the URL relative path &ldquo;/helloWorld&rdquo; (<i>@Path(&quot;/helloWorld&quot;)</i>).</li></ul><ul><li>the HTTP reply sent back to the client should have the Content-Type set to &ldquo;text/hml&rdquo; (<span class="s1"><i>@Produces</i></span>).</li></ul><ul><li><i>sayHi</i> is to be called when the HTTP request is a GET and the relative path is &ldquo;/helloWorld/sayHi/&rdquo; + [variable] (<i><span class="s1">@Path<b>(</b></span>&ldquo;sayHi/{text}&quot;<span class="s1"><b>)</b></span></i>).</li></ul><ul><li>to bind the URL parameter with the method argument <i>text</i> (<i>@PathParam</i>).</li></ul><br />As in the previous how-to, I&rsquo;m going to deploy the app onto an embedded Jetty server instead of deploying it onto a standalone web container:<br /><br /><script src="https://gist.github.com/claudemamo/4346702.js?file=Server.java"></script><i>RuntimeDelegate.getInstance().createEndpoint(&hellip;)</i> is a JAX-RS method that returns an unpublished endpoint. It takes in:<br /><ul><li>a class responsible for configuring and launching the web server. This class differs across JAX-RS providers. CXF expects this class to be <i>JAXRSServerFactoryBean</i>.</li></ul><ul><li>an object that extends <i>Application</i>. This user-defined class must return JAX-RS annotated classes responsible for processing client requests. For us, this means returning <i>HelloWorldImpl:</i></li></ul><div><br /><script src="https://gist.github.com/claudemamo/4346702.js?file=HelloWorldApp.java"></script>Back to our <i>Server.java</i> file, I tell the endpoint to bind the server to the URL <i>http://localhost:9000</i>. Then, from the endpoint, I create a <i>org.apache.cxf.endpoint.Server</i> object and invoke <i>start(&hellip;)</i> to publish the service. Note that, underneath, <i>org.apache.cxf.endpoint.Server</i> is a configured Jetty. </div><br />Before testing the service, I add the required CXF libraries to the Java classpath by declaring them as dependencies in project&rsquo;s POM :<br /><br /><script src="https://gist.github.com/claudemamo/4346702.js?file=pom.xml"></script>If you compare this POM with the <a href="https://gist.github.com/claudemamo/4306173#file-pom-xml" target="_blank">POM</a> of the first how-to, you&rsquo;ll note that now I&rsquo;ve swapped the JAX-WS frontend with the JAX-RS one.<br /><br />All that is left is to run the server with the following Maven commands:<br /><br /><script src="https://gist.github.com/claudemamo/4346702.js?file=run.sh"></script>Once the server is up, accessing via your browser the URL <i><a href="http://localhost:9000/helloWorld/sayHi/Ricston">http://localhost:9000/helloWorld/sayHi/Ricston</a></i> should give you &ldquo;Hello Ricston&rdquo;.</p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+

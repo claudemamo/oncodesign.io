@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+<title>Sharing an FTP service between un-clustered Mule instances - On Code &amp; Design</title>
+<meta property="og:title" content="Sharing an FTP service between un-clustered Mule instances - On Code &amp; Design">
+<meta property="og:type" content="article" />
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://oncodesign.io/css/main.css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700">
+<link rel='stylesheet' href="//fonts.googleapis.com/css?family=Noto+Serif">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <ul class="nav-links">
+    <a href="https://oncodesign.io/" class="nav-logo"><img src="https://oncodesign.io/images/avatar.png" width="50" height="50"></a>
+    <a class="nav-logo nav-links about-link" href="/about/">About</a>
+  </ul>
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/claudemamo" target="_blank"><i class="nav-icon fa fa-github fa-3x" aria-hidden="true"></i></a></li>
+    <li><a href="http://mt.linkedin.com/in/claudemamo" target="_blank"><i class="nav-icon fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Sharing an FTP service between un-clustered Mule instances</h1>
+
+    
+    <span class="article-date">August 3, 2012</span>
+    
+
+    <div class="article-content">
+      <p><span style="background-color: white;">One notorious problem when having Mule instances <b>consuming</b> files from the same FTP server i</span><span style="background-color: white;">s that it&rsquo;s possibile for two or more Mule instances </span><span style="background-color: white;">to concurrently download the same file. This leads to duplicate messages: Mule messages representing </span><span style="background-color: white;">the same file in different Mule nodes.</span><br /><div class="separator" style="clear: both; text-align: center;"><img style="max-width:45%" border="0" src="http://3.bp.blogspot.com/-qLrIGlSH598/UBtred6AG7I/AAAAAAAAACc/hO0yhIi4h3A/s400/ftp-server-unclustered.png" /></div><div class="separator" style="clear: both; text-align: center;"></div><span style="background-color: white;"><br /></span><span style="background-color: white;"></span><span style="background-color: white;">The <a href="http://www.mulesoft.org/documentation/display/mmc/Mule+High+Availability+(HA)+Clusters" target="_blank">clustering solution</a> offered by Mule EE 3.2 addresses this issue by having Mule instances </span><span style="background-color: white;">coordinate among each other on who will download files from the FTP server. </span><br /><br /><div class="separator" style="clear: both; text-align: center;"><img border="0" style="max-width:50%" src="http://4.bp.blogspot.com/-j5n01jCjpSQ/UjlbnyndVMI/AAAAAAAAAGU/XveenL_Xzqw/s400/ftp-server-clustered-2.png" /></div><div class="separator" style="clear: both; text-align: center;"></div><div class="separator" style="clear: both; text-align: center;"></div><br />Clustering introduces a<span style="background-color: white;">n <a href="http://www.hazelcast.com/" target="_blank">in-memory data grid</a> to your Mule nodes. A</span><span style="background-color: white;">n in-memory data grid adds significant complexity which is fine if you intend to use it for load balancing VM queues, share router state, etc&hellip; But for me, all that complexity is un-necessary if you intend to use clustering <b>just for the sake</b> of preventing Mule instances grabbing the same file on a FTP server. It&rsquo;s like hitting a nail with a sledge-hammer.</span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">What&rsquo;s the alternative to using a cluster?</span><span style="background-color: white;"> The alternatives my colleagues and me came up with </span><span style="background-color: white;">weren&rsquo;t exactly pretty and all of them involved doing some playing around inside of Mule. </span><span style="background-color: white;">These days I&rsquo;ve been travelling which gave me time to think more clearly </span><span style="background-color: white;">about the problem. It turns out that a potential simple solution (</span><span style="background-color: white;">at the expense of a small increase in latency)</span><span style="background-color: white;"> lies outside of Mule:</span><br /><br /><div class="separator" style="clear: both; text-align: center;"><img border="0" style="max-width:45%" src="http://2.bp.blogspot.com/--QVeyQCEydk/UBhjH3jSNKI/AAAAAAAAAB0/MGS5BaKGnJw/s400/ftp-server-proxy.png" /></div><br />In above setup, the FTP proxy between the set of Mule instances and the FTP server is responsible for ensuring that<span style="background-color: white;"> a Mule node gets served a &lsquo;free&rsquo; file. S</span><span style="background-color: white;">uch a solution should be relatively easy to develop and add little complexity </span><span style="background-color: white;">compared to others, right? To be sure, I set about implementing the <a href="https://github.com/claudemamo/mule-ftp-proxy" target="_blank">FTP proxy</a>. </span><span style="background-color: white;">Luckily, most of the work was already done for me. James Healey took the trouble of developing an event-driven FTP framework in Ruby: <a href="https://github.com/yob/em-ftpd" target="_blank">em-ftpd</a>. All I had to do was to add callbacks which corresponded to FTP actions (e.g., ls, get, size, etc&hellip;). After a couple of hours I got a <b>naive</b> implementation up and running:</span><span style="background-color: white;"><br /></span><br /><script src="https://gist.github.com/claudemamo/3215625.js?file=driver.rb"></script><span style="background-color: white;"></span><i>MuleFtpProxyDriver</i> <span style="background-color: white;">represents a Mule FTP connection. This means that it&rsquo;s </span><span style="background-color: white;">instantiated every time Mule attempts to do a FTP login</span><span style="background-color: white;">. It </span><span style="background-color: white;">declares two class variables: </span><br /><ul><li><span style="background-color: white;"><i>@@hidden_files</i> is a list containing files Mule instances are downloading. As you will see, a Mule instance isn&rsquo;t permitted to start a download on a file contained within the list. This removes the chance of having duplicate messages.</span></li><li><span style="background-color: white;"><i>@@mutex</i> is the lock used by the MuleFtpProxyDriver instances to access safely <i>@@hidden_files</i>.</span></li></ul><span style="background-color: white;">The </span><span style="background-color: white;">FTP server,</span><span style="background-color: white;"> which the proxy will relay requests to, has its details passed to </span><span style="background-color: white;"><i>MuleFtpProxyDriver</i>&rsquo;s constructor. The constructor</span><span style="background-color: white;"> generates a unique ID that the </span><i>MuleFtpProxyDriver</i><span style="background-color: white;"> instance uses to keep track of the files it&rsquo;s downloading. </span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">The <i>dir_contents</i> method returns the list of files in a directory. T</span><span style="background-color: white;">he proxy lists only files which are &lsquo;free&rsquo;. Therefore, Mule doesn&rsquo;t attempt the download a file that is being download since it&rsquo;s hidden from view. </span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">In the <i>get_file</i> method, the requested file is compared against the list of hidden files. If there is a match, the proxy tells Mule that the file is unavailable. Otherwise, it transfers the file from the FTP server to Mule. </span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">The <i>delete_file</i> method, in addition to deleting the file from disk, removes the file entry from </span><span style="background-color: white;"><i>@@hiddenfiles</i>. This allows a new file, with the same name as the deleted file, to be downloaded.</span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">The <i>unbind</i> method is invoked whenever the FTP connection is broken or closed. It makes again visible those files which didn&rsquo;t download completely.</span><br /><span style="background-color: white;"><br /></span><span style="background-color: white;">As usual, instructions on configuring and running the FTP proxy are found in the <a href="https://github.com/claudemamo/mule-ftp-proxy" target="_blank">repo</a>. Try it out and l</span><span style="background-color: white;">et me know your thoughts about using an FTP proxy as an alternative to clustering.</span></p>
+
+    </div>
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "oncodesign" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80349200-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fc0c4604ad8648e"></script>
+  </body>
+</html>
+
