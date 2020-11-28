@@ -25,7 +25,7 @@ there are breaking changes like the dropping of support for Java 7. What follows
     * After reaching consensus among our code contributors, we've dual-licensed Smooks under [LGPL v3.0](https://choosealicense.com/licenses/lgpl-3.0/) and [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/). 
     This license change keeps Smooks open source while adopting a permissive stance to modifications.
 * Numerous dependency updates
-* Maven coordinates change
+* Relocated Maven artifacts
     * We are now publishing artifacts under Maven group IDs prefixed with "org.smooks".
 
 Head on over to Smooks’s extensive [catalogue of examples](https://github.com/smooks/smooks-examples/tree/v1.0.0) to get yourself started on 2.0.0-M1. The next milestone release 
