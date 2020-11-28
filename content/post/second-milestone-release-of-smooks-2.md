@@ -18,7 +18,7 @@ different application APIs:
 
 <script src="https://gist.github.com/claudemamo/db790ce86c7ac65581f62c7b4cd4b2a1.js?file=MyDomAndSaxVisitor.java"></script>
 
-The above broadly translates into two different execution paths and all the baggage it entails. Smooks 2.0.0-M2 unifies 
+The above broadly translated into two different execution paths, with all the baggage it entailed. Smooks 2.0.0-M2 unifies 
 the DOM and SAX visitor APIs without sacrificing convenience or performance. The new SAX NG filter drops the API 
 distinction between DOM and SAX. Instead, it streams SAX events as **partial** DOM elements to SAX NG visitors:
 
@@ -61,7 +61,8 @@ For instance, the D03B EDIFACT binding dependency can be declared in your POM wi
 
 <script src="https://gist.github.com/claudemamo/db790ce86c7ac65581f62c7b4cd4b2a1.js?file=pom.xml"></script>
 
-Visit the [java-to-edifact](https://github.com/smooks/smooks-examples/tree/v1.0.1/java-to-edifact) project in the examples catalogue to view Java bindings used together with Smooks. 
+Visit the [java-to-edifact](https://github.com/smooks/smooks-examples/tree/v1.0.1/java-to-edifact) project in the examples 
+catalogue to see how Smooks turns an interchange Java bean instance into EDIFACT. 
 
 
 ### Selector Namespace Prefixes
