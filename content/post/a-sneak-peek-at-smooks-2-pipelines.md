@@ -45,13 +45,13 @@ A scalable solution powered by Smooks pipelines can be conceptualised to:
 
 Every data integration point is implemented in its own pipeline. Smooks converts the CSV input into a stream of events, 
 triggering the pipelines at different points in the stream. The document root event (i.e., _#document_ or _file_) triggers the 
-EDI pipeline while a record (i.e., an order) event triggers the inventory and CRM pipelines. Time to get cracking and implement 
+EDI pipeline while _record_ (i.e., an order) events drive the inventory and CRM pipelines. Time to get cracking and implement 
 the solution in a Smooks config.
 
 
 ### Reader
 
-The first step to implementing the solution is to turn the CSV file stream into an event stream using the DFDL parser added 
+The first step to implementing the solution is to turn the CSV file stream into an event stream using the [DFDL](https://daffodil.apache.org/) parser added 
 in Smooks 2.0.0-M1 (alternatively, a simpler but less flexible reader from the CSV cartridge can be used for this purpose):
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=smooks-config.2.xml"></script>
@@ -160,8 +160,8 @@ would want to generate dynamically data elements like sequence numbers.
 
 The pipeline within a pipeline collects the item events and appends them to the record tree (`maxNodeDepth="0"`) before 
 pushing the record tree down to the enclosed FreeMarker visitor. As a side note, this config could be simplified by unwrapping 
-the FreeMarker visitor and setting the _maxNodeDepth_ attribute to 0 in the _#document_ pipeline but then that would lead 
-to the pipeline reading the entire event stream into memory.
+the FreeMarker visitor and setting the _maxNodeDepth_ attribute to 0 in the _#document_ pipeline but then that would unfortunately 
+lead to the pipeline reading the entire event stream into memory.
 
 The _body.xml.ftl_ template warrants a closer look:
 
