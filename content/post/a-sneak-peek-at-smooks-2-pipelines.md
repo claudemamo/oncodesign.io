@@ -15,8 +15,8 @@ tags = ["Smooks", "Pipelines", "2.0.0-M3", "EDI", "EDIFACT", "DFDL" ]
 We’re inching ever closer to releasing Smooks 2 milestone 3. Featuring in this release will be the powerful ability to 
 declare pipelines. A pipeline is a flexible, yet simple, Smooks construct that isolates the processing of a targeted event 
 from its main processing as well as from the processing of other pipelines. In practice, this means being able to compose 
-any series of transformations on an event outside the main execution context before, optionally, directing the pipeline 
-output to the execution result stream or to other destinations.
+any series of transformations on an event outside the main execution context before directing the pipeline output to the 
+execution result stream or to other destinations.
 
 Under the hood, a pipeline is just another instance of Smooks. This is self-evident from the Smooks config element declaring 
 a pipeline:
@@ -45,7 +45,7 @@ A scalable solution powered by Smooks pipelines can be conceptualised to:
 
 Every data integration point is implemented in its own pipeline. Smooks converts the CSV input into a stream of events, 
 triggering the pipelines at different points in the stream. The document root event (i.e., _#document_ or _file_) triggers the 
-EDI pipeline while _record_ (i.e., an order) events drive the inventory and CRM pipelines. Time to get cracking and implement 
+EDI pipeline while _record_ (i.e., order) events drive the inventory and CRM pipelines. Time to get cracking and implement 
 the solution in a Smooks config.
 
 
