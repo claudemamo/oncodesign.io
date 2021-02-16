@@ -93,7 +93,7 @@ _InventoryVisitor_ visits record events and writes its output to a stream declar
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=InventoryVisitor.java"></script>
 
-The _AfterVisitor_ implementation leverages the popular Jackson library to serialise the record element into JSON which 
+The _AfterVisitor_ implementation leverages the popular [Jackson library](https://github.com/FasterXML/jackson) to serialise the record element into JSON which 
 is then transparently written out to the inventoryOutputStream with `Stream.out(executionContext).write(...)`.
 
 ### CRM Pipeline
@@ -167,7 +167,7 @@ The _body.xml.ftl_ template warrants a closer look:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=body.xml.ftl"></script>
 
-FreeMarker materialises and feeds the above segment group to the _edifact:unparser_ for each visited _item_ event.
+FreeMarker materialises and feeds the above segment group to the _edifact:unparser_ for each visited _record_ event.
 
 * ##### Footer Visitor
 
