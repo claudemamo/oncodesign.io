@@ -12,7 +12,7 @@ tags = ["Smooks", "Pipelines", "2.0.0-M3", "EDI", "EDIFACT", "DFDL" ]
 </figure>
 
 
-We’re inching ever closer to releasing Smooks 2 milestone 3. Featuring in this release will be the powerful ability to 
+We’re inching ever closer to releasing [Smooks](https://www.smooks.org/) 2 milestone 3. Featuring in this release will be the powerful ability to 
 declare pipelines. A pipeline is a flexible, yet simple, Smooks construct that isolates the processing of a targeted event 
 from its main processing as well as from the processing of other pipelines. In practice, this means being able to compose 
 any series of transformations on an event outside the main execution context before directing the pipeline output to the 
