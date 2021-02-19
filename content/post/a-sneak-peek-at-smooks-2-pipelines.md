@@ -30,8 +30,8 @@ to the execution context’s bean store.
 
 _core:config_ expects a standard _smooks-resource-list_ defining the pipeline’s behaviour. It’s worth highlighting that the 
 nested _smooks-resource-list_ element behaves identically to the outer one, and therefore, it accepts resources like visitors, 
-readers, and even pipelines (a pipeline within a pipeline!). Moreover, a pipeline is transparent to its nested resources, 
-so a resource’s behaviour will remain the same whether it’s declared inside a pipeline or outside it.
+readers, and even pipelines (a pipeline within a pipeline!). Moreover, a pipeline is transparent to its nested resources: 
+a resource’s behaviour remains the same whether it’s declared inside a pipeline or outside it.
 
 Let’s illustrate the power of pipelines in a real-world use case. Consider this classic data integration problem:
 
@@ -159,9 +159,9 @@ would want to generate dynamically data elements like sequence numbers.
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=smooks-config.8.xml"></script>
 
 The pipeline within a pipeline collects the item events and appends them to the record tree (`maxNodeDepth="0"`) before 
-pushing the record tree down to the enclosed FreeMarker visitor. As a side note, this config could be simplified by unwrapping 
-the FreeMarker visitor and setting the _maxNodeDepth_ attribute to 0 in the _#document_ pipeline but then that would unfortunately 
-lead to the pipeline reading the entire event stream into memory.
+pushing the record tree down to the enclosed FreeMarker visitor. As a side note, the body logic could be simplified by unnesting 
+the FreeMarker visitor and setting the _maxNodeDepth_ attribute to 0 in the _#document_ pipeline. Unfortunately, such a 
+simplification would come at the cost of reading the entire event stream into memory.
 
 The _body.xml.ftl_ template warrants a closer look:
 
