@@ -94,7 +94,7 @@ _InventoryVisitor_ visits record events and writes its output to a stream declar
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=InventoryVisitor.java"></script>
 
 The _AfterVisitor_ implementation leverages the popular [Jackson library](https://github.com/FasterXML/jackson) to serialise the record element into JSON which 
-is then transparently written out to the inventoryOutputStream with `Stream.out(executionContext).write(...)`.
+is then transparently written out to _inventoryOutputStream_ with `Stream.out(executionContext).write(...)`.
 
 ### CRM Pipeline
 
@@ -105,12 +105,12 @@ Like the inventory pipeline, the CRM pipeline visits each _record_ event:
 Spot the differences between the inventory and CRM pipelines. This pipeline omits _core:action_ because the _CrmVisitor_ resource 
 HTTP POSTs the result directly to the CRM service. Another notable difference is the appearance of a new Smooks 2 reader. 
 
-_core:node-reader_ delegates the pipeline event stream to an enclosed _ftl:freemarker_ visitor which instantiates the underneath 
+_core:delegate-reader_ delegates the pipeline event stream to an enclosed _ftl:freemarker_ visitor which instantiates the underneath 
 template with the selected _record_ event as a parameter:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=purchaseOrder.xml.ftl"></script>
 
-_core:node-reader_ goes on to feed Freemarker’s instantiated template to _CrmVisitor_, in other words, _core:node-reader_ converts 
+_core:delegate-reader_ goes on to feed Freemarker’s instantiated template to _CrmVisitor_, in other words, _core:delegate-reader_ converts 
 the pipeline event stream into one _CrmVisitor_ can visit:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=CrmVisitor.java"></script>
@@ -133,12 +133,12 @@ The selector for this pipeline is set to _#document_; not _record_. _#document_,
 pipeline firing only once, necessary for creating a single EDIFACT document header and footer. We’ll worry later about how 
 to enumerate the _record_ events.
 
-The subsequent pipeline config leverages _core:node-reader_, introduced in the previous pipeline, to convert the event stream 
+The subsequent pipeline config leverages _core:delegate-reader_, introduced in the previous pipeline, to convert the event stream 
 into a stream _edifact:unparser_ (covered furthered on) can understand:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=smooks-config.6.xml"></script>
 
-_core:node-reader_ delivers the pipeline event stream to its child visitors. Triggered FreeMarker visitors proceed to materialise 
+_core:delegate-reader_ delivers the pipeline event stream to its child visitors. Triggered FreeMarker visitors proceed to materialise 
 their templates and have their output fed to the _edifact:unparser_ for serialisation. The previous snippet has a lot to unpack 
 therefore a brief explanation of each enclosed visitor’s role is in order.
 
@@ -183,7 +183,7 @@ The final piece to the solution is to configure the _edifact:unparser_:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=smooks-config.10.xml"></script>
 
-As per the _unparseOnElement_ wildcard selector, the pipeline delivers all events generated from the _core:node-reader_ visitors 
+As per the _unparseOnElement_ wildcard selector, the pipeline delivers all events generated from the _core:delegate-reader_ visitors 
 to _edifact:unparser_ to be serialised into EDIFACT before the pipeline merges the serialised events with the result stream.
 
 Let’s take a step back to view the complete Smooks config:
