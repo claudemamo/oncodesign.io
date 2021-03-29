@@ -21,9 +21,9 @@ allows developers to unleash Smooks’s full potential when processing flat file
 * Forking [Apache Xerces](https://en.wikipedia.org/wiki/Apache_Xerces) and modify it to provide a more optimal DOM implementation
 
 All these optimisations have translated to a massive jump in throughput as demonstrated by our benchmarks. In one benchmark 
-consisting of a non-trivial config, Smooks churned through a 1.5 GB [real-world XML dataset](https://datahub.io/collections/bibliographic-data) in under 20 minutes! Not bad 
+consisting of a non-trivial config, Smooks churned through a 1.5 GB [real-world XML dataset](https://datahub.io/collections/bibliographic-data#the-dblp-computer-science-bibliography) in under 20 minutes! Not bad 
 considering that the benchmark ran in a desktop environment. This definitely doesn’t mark the end of our performance tuning 
-exercise. To keep us on our toes, the latest Smooks snapshot is benchmarked every time code is checked in, and the results archived for review.
+exercise. To keep us on our toes, the latest Smooks snapshot is benchmarked every time code is checked in, and the results [archived for review](https://github.com/smooks/smooks/releases/download/v2.0.0-M3/recording.zip).
 
 Aside from better performance, pipelines have made their grand debut in 2.0.0-M3. As discussed in an [earlier blog post](/2021/02/16/a-sneak-peek-at-smooks-2-pipelines/), 
 a pipeline is a flexible, yet simple, Smooks construct that isolates the processing of a targeted event from its main processing 
@@ -34,9 +34,9 @@ Last but not least, Smooks’s Java namespaces were re-organised to provide a cl
 Broadly speaking, Smooks classes now fall under two top-level packages:
 
 * `org.smooks.api`: represents the Java contract between the developer and Smooks. Developers can safely assume that referencing 
-  these interfaces will not lead to breakage in their applications when upgrading to a minor or patch Smooks release.
+  interfaces within this package will not lead to breakage in their applications when upgrading to minor or patch versions of Smooks.
 
-* `org.smooks.engine`: represents Smooks’s internals. Whenever possible, developers should avoid referencing these classes 
+* `org.smooks.engine`: represents Smooks’s internals. Whenever possible, developers should avoid referencing this package's classes 
   since no guarantee is given about their backwards compatibility between Smooks releases.
 
 Milestone 3 concludes the final major changes of Smooks 2. Future releases prior to GA will be release candidates addressing 
