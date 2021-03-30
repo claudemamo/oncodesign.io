@@ -10,7 +10,7 @@ tags = ["Smooks", "DFDL", "Performance", "2.0.0-M3", "Pipelines"]
 The [last milestone umbrella release](https://github.com/smooks/smooks/releases/tag/v2.0.0-M3) of Smooks 2 is out. Among the things we’ve focused on in this release is performance. 
 In particular, the [DFDL](https://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/df20060_.htm) cartridge was upgraded to [Apache Daffodil 3](https://daffodil.apache.org/releases/3.0.0/) in order to leverage Daffodil’s new streaming capabilities. 
 This means that the DFDL cartridge, including the specialised EDI and EDIFACT cartridges, are no longer memory-bound which 
-allows developers to unleash Smooks’s full potential when processing flat files. Other noteworthy performance improvements are:
+allows developers to unleash Smooks’s full potential when processing large flat files. Other noteworthy performance improvements are:
 
 * Changing the default SAX parser implementation from Apache Xerces to [FasterXML's Woodstox](https://github.com/FasterXML/woodstox): benchmarks consistently showed Woodstox outperforming Xerces
 
