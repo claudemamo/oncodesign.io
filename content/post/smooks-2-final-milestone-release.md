@@ -28,7 +28,7 @@ exercise. To keep us on our toes, the latest Smooks snapshot is benchmarked ever
 Aside from better performance, pipelines have made their grand debut in 2.0.0-M3. As discussed in an [earlier blog post](/2021/02/16/a-sneak-peek-at-smooks-2-pipelines/), 
 a pipeline is a flexible, yet simple, Smooks construct that isolates the processing of a targeted event from its main processing 
 as well as from the processing of other pipelines. With pipelines, you can enrich data, rename/remove elements or attributes, 
-and much more. Read [2.0.0-M3's docs](https://github.com/smooks/smooks.github.io/blob/v2.0/docs.markdown#pipeline) to learn more about pipelines.
+and much more. Read [2.0.0-M3's docs](https://github.com/smooks/smooks.github.io/blob/v2.0.0-M3/docs.markdown#pipeline) to learn more about pipelines.
 
 Last but not least, Smooks’s Java namespaces were re-organised to provide a cleaner and more intuitive package structure. 
 Broadly speaking, Smooks classes now fall under two top-level packages:
