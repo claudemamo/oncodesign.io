@@ -42,4 +42,4 @@ Following ingestion, Smooks will either:
 
 Voilà, we've implemented a low-cost efficient verification engine with a few lines of XML. The complete source code of this [example is available online](https://github.com/smooks/smooks-examples/tree/master/cross-domain-solution).
 
-[^1]: Smooks 2 release candidate 1 will feature support for selector negation.
+[^1]: Smooks 2 release candidate 1 will feature selector negation support.
