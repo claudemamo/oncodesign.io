@@ -4,19 +4,17 @@ date = 2021-12-05T20:45:00+02:00
 tags = ["Smooks", "DFDL", "Apache Daffodil", "Smooks 2", "cross domain solution", "cyber security"]
 +++
 
-In the cyber security space, a [cross domain solution](https://www.cyber.gov.au/acsc/view-all-content/publications/fundamentals-cross-domain-solutions) is a bridge connecting two different security domains, permitting data to flow from one domain into another while minimising the associated security risks.
-A filter, or more formally a [verification engine](https://www.ncsc.gov.uk/collection/cross-domain-solutions/using-the-principles/content-based-attack-protection), is a suggested component in a cross domain solution.
+In the cyber security space, a [cross domain solution](https://www.cyber.gov.au/acsc/view-all-content/publications/fundamentals-cross-domain-solutions) is a bridge connecting two different security domains, permitting data to flow from one domain into another while minimising the associated security risks. A filter, or more formally a [verification engine](https://www.ncsc.gov.uk/collection/cross-domain-solutions/using-the-principles/content-based-attack-protection), is a suggested component in a cross domain solution.
 
 <br/>
 <img src="/images/cross-domain-solution.png" alt="Cross Domain Solution"/>
 <br/>
 
-A filter inspects for anomalies the content flowing through the bridge. Data failing inspection
-is captured for investigation by the security team. Given this brief description, I argue for the following properties in a verification engine:
+A filter inspects the content flowing through the bridge. Data failing inspection is captured for investigation by the security team. Given this brief description, I argue for the following properties in a verification engine:
 
 * Validation: syntactically and semantically validates complex data formats
 
-* Content-based routing: routes valid data to its destination while invalid data is routed to a different channel
+* Content-based routing: routes valid data to its destination while invalid (e.g., malformed or malicious) data is routed to a different channel
 
 * Data streaming: filters data whatever the size which implies parsing the data and then reassembling it
 
@@ -34,12 +32,12 @@ The second tweak is to nest legit data within a `ValidData` element:
 
 <script src="https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92.js?file=good-data.xml"></script>
 
-Following ingestion, Smooks will either:
+After ingestion, Smooks fires one of the following paths:
 
-&nbsp;&nbsp; a. [Fire the happy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L8-L20) on encountering events that are not descendants of the `InvalidData` node [^1]. A pipeline executes [`dfdl:unparser`](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L16-L17) to reassemble the data in its original format, to then go on and replace the XML execution result stream with the reassembled binary data which will be delivered to the destination (i.e., the trusted sytem).
+&nbsp;&nbsp; a. [Happy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L8-L20) on encountering events that are not descendants of the `InvalidData` node [1]. A pipeline executes [`dfdl:unparser`](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L16-L17) to reassemble the data in its original format, to then go on and replace the XML execution result stream with the reassembled binary data which will be delivered to the destination (i.e., the trusted sytem).
 
-&nbsp;&nbsp; b. [Fire the unhappy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L22-L33). A different pipeline streams `InvalidData` to an output resource named `deadLetterStream`.
+&nbsp;&nbsp; b. [Unhappy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L22-L33) on encountering the `InvalidData` node. This path's pipeline streams the hex content of `InvalidData` to a side output resource named `deadLetterStream`.
 
-Voilà, we've implemented a low-cost efficient verification engine with a few lines of XML. The complete source code of this [example is available online](https://github.com/smooks/smooks-examples/tree/master/cross-domain-solution).
+Voilà, a low-cost efficient verification engine was implemented with a few lines of XML. The complete source code of this [example is available online](https://github.com/smooks/smooks-examples/tree/master/cross-domain-solution).
 
-[^1]: Smooks 2 release candidate 1 will feature selector negation support.
+<sub><sup>1. Smooks 2 RC1 will feature support for selector negation.</sup></sub>
