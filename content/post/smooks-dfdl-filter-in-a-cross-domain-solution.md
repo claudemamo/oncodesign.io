@@ -1,7 +1,7 @@
 +++
 title = "Smooks DFDL Filter in a Cross Domain Solution"
 date = 2021-12-05T20:45:00+02:00
-tags = ["Smooks", "DFDL", "Apache Daffodil", "Smooks 2", "cross domain solution", "cyber security"]
+tags = ["Smooks", "DFDL", "Apache Daffodil", "Smooks 2", "cross domain solution", "cybersecurity", "cyber security"]
 +++
 
 In the cyber security space, a [cross domain solution](https://www.cyber.gov.au/acsc/view-all-content/publications/fundamentals-cross-domain-solutions) is a bridge connecting two different security domains, permitting data to flow from one domain into another while minimising the associated security risks. A filter, or more formally a [verification engine](https://www.ncsc.gov.uk/collection/cross-domain-solutions/using-the-principles/content-based-attack-protection), is a suggested component in a cross domain solution.
@@ -24,7 +24,7 @@ A filter inspects the content flowing through the bridge. Data failing inspectio
 
 <script src="https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92.js?file=smooks-config.xml"></script>
 
-[`dfdl:parser`](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L6) ingests the binary content from the input source (i.e., the untrusted system) and validates the produced event stream. Driving the transformation and validation behaviour is the XML schema `nitf.dfdl.xsd` which is copied from the [public DFDL schema repository](https://github.com/DFDLSchemas/NITF) and tweaked in order to route the data depending on its correctness. The first tweak is to turn invalid NITF data into hex with an `InvalidData` element wrapped around it like so:
+[`dfdl:parser`](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L6) validates the binary content streaming from the input source (i.e., the untrusted system) and converts it to an event stream firing the pipelines. Driving the input's validation and transformation behaviour is the XML schema `nitf.dfdl.xsd`, copied from the [public DFDL schema repository](https://github.com/DFDLSchemas/NITF) and tweaked in order to route the data depending on its correctness. The first tweak is to turn invalid NITF data into hex with an `InvalidData` element wrapped around it like so:
 
 <script src="https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92.js?file=bad-data.xml"></script>
 
@@ -36,7 +36,7 @@ After ingestion, Smooks fires one of the following paths:
 
 &nbsp;&nbsp; a. [Happy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L8-L20) on encountering events that are not descendants of the `InvalidData` node [1]. A pipeline executes [`dfdl:unparser`](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L16-L17) to reassemble the data in its original format, to then go on and replace the XML execution result stream with the reassembled binary data which will be delivered to the destination (i.e., the trusted sytem).
 
-&nbsp;&nbsp; b. [Unhappy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L22-L33) on encountering the `InvalidData` node. This path's pipeline streams the hex content of `InvalidData` to a side output resource named `deadLetterStream`.
+&nbsp;&nbsp; b. [Unhappy path](https://gist.github.com/claudemamo/56d73cf6af94a6eae4928beaf60a0e92#file-smooks-config-xml-L22-L33) on encountering the `InvalidData` node. This path's pipeline emits the hex content of `InvalidData` to a side output resource named `deadLetterStream`.
 
 Voilà, a low-cost efficient verification engine was implemented with a few lines of XML. The complete source code of this [example is available online](https://github.com/smooks/smooks-examples/tree/master/cross-domain-solution).
 
