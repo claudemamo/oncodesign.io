@@ -24,17 +24,13 @@ Under the hood, a pipeline is just another instance of Smooks. This is self-evid
 
 Let’s illustrate the power of pipelines in a real-world use case. Consider this classic data integration problem:
 
->An organisation is required at the end of day to churn through GBs of customer orders captured in a CSV file and hosted 
-on an FTP server. Each individual order is to be communicated to the inventory system in JSON and uploaded as XML to a CRM service. 
-Furthermore, an [EDIFACT](https://unece.org/trade/uncefact/introducing-unedifact) document aggregating the orders needs to be exchanged with the supplier.
+>An organisation is required at the end of day to churn through GBs of customer orders captured in a CSV file. Each individual order is to be communicated to the inventory system in JSON and uploaded as XML to a CRM service. Furthermore, an [EDIFACT](https://unece.org/trade/uncefact/introducing-unedifact) document aggregating the orders needs to be exchanged with the supplier.
 
 A scalable solution powered by Smooks pipelines can be conceptualised to:
 
 <img src="/images/smooks-2-pipelines.png" alt="Smooks 2 pipelines"/>
 
-Every data integration point is implemented in its own pipeline. Smooks converts the CSV input into a stream of events, 
-triggering the pipelines at different points in the stream. The document root event (i.e., `#document` or `file`) triggers the EDI pipeline while `record` (i.e., order) events drive the inventory and CRM pipelines. Time to get cracking and implement the solution in a Smooks config.
-
+Every data integration point is implemented in its own pipeline. Smooks converts the CSV input into a stream of events, triggering the pipelines at different points in the stream. The document root event (i.e., `#document` or `file`) triggers the EDI pipeline while `record` (i.e., order) events drive the inventory and CRM pipelines. Time to get cracking and implement the solution in a Smooks config.
 
 ### Reader
 
@@ -55,7 +51,6 @@ into the SAX event stream:
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=event-stream.xml"></script>
 
 The events of interest are the `file`, `record`, and `item` events. Coming up next are the pipeline configurations.
-
 
 ### Inventory Pipeline
 
@@ -79,7 +74,7 @@ Like the inventory pipeline, the CRM pipeline visits each `record` event:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=smooks-config.4.xml"></script>
 
-Spot the differences between the inventory and CRM pipelines. This pipeline omits `core:action` because the `CrmVisitor` resource HTTP POSTs the result directly to the CRM service. Another notable difference is the appearance of a new Smooks 2 reader. 
+Spot the differences between the inventory and CRM pipelines. This pipeline omits `core:action` because the `CrmVisitor` resource HTTP POSTs the result directly to the CRM service. Another notable difference is the appearance of a new Smooks 2 reader.
 
 `core:delegate-reader` delegates the pipeline event stream to an enclosed `ftl:freemarker` visitor which instantiates the underneath template with the selected `record` event as a parameter:
 
@@ -89,8 +84,7 @@ Spot the differences between the inventory and CRM pipelines. This pipeline omit
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=CrmVisitor.java"></script>
 
-`CrmVisitor`’s code should be self-explanatory. Observe `org.asynchttpclient.AsyncHttpClient` is referenced in `visitAfter(...)`to perform a non-blocking HTTP POST. All framework execution in Smooks happens in a single thread so blocking calls should be avoided to keep the throughput rate acceptable.
-
+`CrmVisitor`’s code should be self-explanatory. Observe `org.asynchttpclient.AsyncHttpClient` is referenced in `visitAfter(...)`to perform a non-blocking HTTP POST. All framework execution in Smooks happens in a single thread so blocking calls in the application should be avoided to keep the throughput rate acceptable.
 
 ### EDI Pipeline
 
@@ -106,7 +100,6 @@ The subsequent pipeline config leverages `core:delegate-reader`, introduced in t
 
 `core:delegate-reader` delivers the pipeline event stream to its child visitors. Triggered FreeMarker visitors proceed to materialise their templates and have their output fed to the `edifact:unparser` for serialisation. The previous snippet has a lot to unpack therefore a brief explanation of each enclosed visitor’s role is in order.
 
-
 * ##### Header Visitor
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=smooks-config.7.xml"></script>
@@ -114,7 +107,6 @@ The subsequent pipeline config leverages `core:delegate-reader`, introduced in t
 On encountering the opening root tag, this FreeMarker visitor feeds the XML header from the _header.xml.ftl_ template to the `edifact:unparser`. The content of _header.xml.ftl_, shown next, is static for illustration purposes. In the real world, one would want to generate dynamically data elements like sequence numbers.
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=header.xml.ftl"></script>
-
 
 * ##### Body Visitor
 
@@ -135,7 +127,6 @@ FreeMarker materialises and feeds the above segment group to the `edifact:unpars
 This FreeMarker visitor is fired on the closing root tag, following the serialisation of the header and body. The footer residing in _footer.xml.ftl_ is also fed to the `edifact:unparser`:
 
 <script src="https://gist.github.com/claudemamo/a65e33b1ee62984cb507b77baea75100.js?file=footer.xml.ftl"></script>
-
 
 The final piece to the solution is to configure the `edifact:unparser`:
 
